@@ -1,4 +1,4 @@
-import { MapPin, Navigation } from "lucide-react";
+import { MapPin, Navigation, TrainFront } from "lucide-react";
 import CopyButton from "@/components/CopyButton";
 import VenueMap from "@/components/VenueMap";
 import { mapLinks, wedding } from "@/data/wedding";
@@ -15,6 +15,19 @@ export default function VenueSection() {
           <br />
           {wedding.venue.hall} · {wedding.venue.floorDetail} · {wedding.venue.note}
         </p>
+      </div>
+
+      <div className="venue-transit" aria-label="지하철 안내">
+        <span className="venue-transit-icon" aria-hidden="true">
+          <TrainFront className="info-icon" size={19} />
+        </span>
+        <div>
+          <span>지하철</span>
+          <strong>
+            {wedding.venue.subwayLine} {wedding.venue.station} {wedding.venue.exit}
+          </strong>
+          <p>{wedding.venue.exit}로 나오시면 {wedding.venue.walk}입니다.</p>
+        </div>
       </div>
 
       <VenueMap />

@@ -29,12 +29,23 @@ export const wedding = {
     hall: "벨루스홀",
     floor: "B1F",
     floorDetail: "지하 1층(B1F)",
+    subwayLine: "2·7호선",
     station: "건대입구역",
+    exit: "5번 출구",
+    walk: "도보 약 2분",
     address: "서울 광진구 능동로 81",
-    note: "건대입구역 5번 출구 도보 2분",
+    note: "2·7호선 건대입구역 5번 출구 도보 약 2분",
     coordinates: {
       lat: 37.5383624,
       lng: 127.0693132,
+    },
+    stationCoordinates: {
+      lat: 37.54024,
+      lng: 127.06938,
+    },
+    exitCoordinates: {
+      lat: 37.5399303,
+      lng: 127.0703711,
     },
   },
 } as const;
