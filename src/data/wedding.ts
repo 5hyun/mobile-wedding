@@ -4,7 +4,8 @@ export const wedding = {
     name: "권오현",
     shortName: "오현",
     father: "권영호",
-    mother: "故 김경애",
+    mother: "김경애",
+    motherMemorial: true,
     phone: "010-0000-0000",
     phoneHref: "01000000000",
   },
@@ -13,13 +14,14 @@ export const wedding = {
     shortName: "혜선",
     father: "박정필",
     mother: "김은자",
+    motherMemorial: false,
     phone: "010-1111-1111",
     phoneHref: "01011111111",
   },
   date: {
     iso: "2026-09-05T17:00:00+09:00",
     display: "2026년 9월 5일 토요일 오후 5시",
-    compact: "2026.09.05 SAT 5:00 PM",
+    compact: "2026.09.05 SAT · 5PM",
     calendarStartUtc: "20260905T080000Z",
     calendarEndUtc: "20260905T100000Z",
   },
@@ -28,10 +30,8 @@ export const wedding = {
     hall: "2층 야호홀",
     station: "건대입구역",
     address: "서울 광진구 능동로 81",
-    note: "건대입구역 5번 출구 인근",
+    note: "건대입구역 5번 출구에서 가까운 거리",
   },
-  albumUrl:
-    "https://drive.google.com/drive/folders/1RKSzo8L3buo2SHalLVzu8Kilx4Ut7EC0",
 } as const;
 
 /** 축의금 계좌 더미값 */
@@ -57,7 +57,7 @@ export const mapLinks = {
   )}`,
   kakao: `https://map.kakao.com/link/search/${encodeURIComponent(
     `${wedding.venue.name} ${wedding.venue.address}`
-  )}`,
+)}`,
   google: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${wedding.venue.name} ${wedding.venue.address}`
   )}`,
@@ -67,7 +67,7 @@ export const mapLinks = {
 export const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
   `${wedding.groom.name} · ${wedding.bride.name} 결혼식`
 )}&dates=${wedding.date.calendarStartUtc}/${wedding.date.calendarEndUtc}&details=${encodeURIComponent(
-  "소중한 분들을 모시고 조용히, 기쁘게 시작하려 합니다."
+  "가까운 분들과 조용하고 기쁘게 나누고 싶은 날입니다. 따뜻한 마음으로 함께해 주세요."
 )}&location=${encodeURIComponent(
   `${wedding.venue.address} ${wedding.venue.name} ${wedding.venue.hall}`
 )}`;

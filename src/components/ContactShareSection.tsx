@@ -9,7 +9,7 @@ import { copyTextToClipboard } from "@/lib/clipboard";
 export default function ContactShareSection() {
   const [shareStatus, setShareStatus] = useState("");
   const [shareUrl, setShareUrl] = useState("");
-  const invitationTitle = `${wedding.groom.name} · ${wedding.bride.name} 결혼식`;
+  const invitationTitle = `${wedding.groom.shortName}과 ${wedding.bride.shortName}의 결혼식에 초대합니다`;
 
   useEffect(() => {
     setShareUrl(window.location.href);
@@ -22,14 +22,14 @@ export default function ContactShareSection() {
     if (navigator.share) {
       await navigator.share({
         title: invitationTitle,
-        text: `${wedding.date.display}, ${wedding.venue.name} ${wedding.venue.hall}`,
+        text: `${wedding.date.display}, ${wedding.venue.name} ${wedding.venue.hall}에서 만나요.`,
         url: currentShareUrl,
       });
       return;
     }
 
     await copyTextToClipboard(currentShareUrl);
-    setShareStatus("청첩장 링크가 복사되었습니다.");
+    setShareStatus("청첩장 링크가 복사되었어요.");
     window.setTimeout(() => setShareStatus(""), 1800);
   };
 
@@ -37,35 +37,35 @@ export default function ContactShareSection() {
     <section className="contact-section section-pad">
       {/* 연락 및 공유 */}
       <div className="section-copy">
-        <p className="soft-label">Contact</p>
-        <h2>축하의 마음을 전해 주세요</h2>
+        <p className="soft-label">연락처</p>
+        <h2>편하게 연락 주세요</h2>
       </div>
 
       <div className="contact-grid">
         <a href={`tel:${wedding.groom.phoneHref}`}>
-          <Phone size={17} />
-          신랑 전화
+          <Phone className="action-icon" size={17} aria-hidden="true" />
+          {wedding.groom.shortName}에게 전화
         </a>
         <a href={`sms:${wedding.groom.phoneHref}`}>
-          <MessageCircle size={17} />
-          신랑 문자
+          <MessageCircle className="action-icon" size={17} aria-hidden="true" />
+          {wedding.groom.shortName}에게 문자
         </a>
         <a href={`tel:${wedding.bride.phoneHref}`}>
-          <Phone size={17} />
-          신부 전화
+          <Phone className="action-icon" size={17} aria-hidden="true" />
+          {wedding.bride.shortName}에게 전화
         </a>
         <a href={`sms:${wedding.bride.phoneHref}`}>
-          <MessageCircle size={17} />
-          신부 문자
+          <MessageCircle className="action-icon" size={17} aria-hidden="true" />
+          {wedding.bride.shortName}에게 문자
         </a>
       </div>
 
       <div className="share-row">
         <button className="primary-button" type="button" onClick={handleShareClick}>
-          <Share2 size={17} />
+          <Share2 className="action-icon" size={17} aria-hidden="true" />
           청첩장 공유
         </button>
-        <CopyButton label="링크 복사" value={shareUrl || wedding.albumUrl} />
+        {shareUrl ? <CopyButton label="링크 복사" value={shareUrl} /> : null}
       </div>
       {shareStatus ? <p className="toast-text">{shareStatus}</p> : null}
     </section>

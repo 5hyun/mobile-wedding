@@ -32,7 +32,11 @@ export default function CopyButton({
       aria-live="polite"
     >
       {/* 복사 상태 표시 */}
-      {hasCopied ? <Check size={16} /> : <Copy size={16} />}
+      {hasCopied ? (
+        <Check className="action-icon" size={16} aria-hidden="true" />
+      ) : (
+        <Copy className="action-icon" size={16} aria-hidden="true" />
+      )}
       <span>{hasCopied ? "복사됨" : label}</span>
     </button>
   );

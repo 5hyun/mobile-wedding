@@ -16,24 +16,31 @@ const notoSerifKr = Noto_Serif_KR({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://ohyun-hyesun-wedding.vercel.app"
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://mobile-wedding.vercel.app"
   ),
-  title: "권오현 · 박혜선 결혼합니다",
+  title: "오현과 혜선의 결혼식에 초대합니다",
   description:
-    "2026년 9월 5일 오후 5시, 건대입구역 하우스 오브더라움 2층 야호홀에서 권오현 박혜선의 결혼식이 열립니다.",
+    "2026년 9월 5일 오후 5시, 하우스 오브더라움 2층 야호홀에서 권오현 박혜선의 결혼식이 열립니다.",
   openGraph: {
-    title: "권오현 · 박혜선 결혼합니다",
+    title: "오현과 혜선의 결혼식에 초대합니다",
     description: "2026년 9월 5일 토요일 오후 5시, 하우스 오브더라움 2층 야호홀",
     type: "website",
     locale: "ko_KR",
+    siteName: "오현 · 혜선 모바일 청첩장",
     images: [
       {
         url: "/images/og/wedding-og.jpg",
         width: 1200,
         height: 630,
-        alt: "권오현 박혜선 모바일 청첩장",
+        alt: "오현과 혜선의 결혼식 초대 이미지",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "오현과 혜선의 결혼식에 초대합니다",
+    description: "2026년 9월 5일 토요일 오후 5시, 하우스 오브더라움 2층 야호홀",
+    images: ["/images/og/wedding-og.jpg"],
   },
 };
 

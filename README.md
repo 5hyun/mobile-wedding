@@ -20,12 +20,13 @@ Vercel에서 이 폴더를 프로젝트로 연결하면 됩니다.
 NEXT_PUBLIC_SITE_URL=https://배포주소.vercel.app
 ```
 
-이 값은 공유 링크의 OG 이미지 기준 주소로 사용됩니다.
+이 값은 카카오톡/문자 공유 미리보기의 OG 이미지 기준 주소로 사용됩니다.
 
 ## 수정 위치
 
 - 예식 정보: `src/data/wedding.ts`
 - 첫 화면/인트로 사진: `src/data/photos.ts`
-- 컨셉별 갤러리 사진: `src/data/concepts.ts`
+- 선별 갤러리 사진: `src/data/gallery.ts`
+- 카카오톡 공유 이미지: `public/images/og/wedding-og.jpg`
 - 주요 화면: `src/components/`
 - 전체 스타일: `src/app/globals.css`

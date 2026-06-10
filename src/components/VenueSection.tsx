@@ -1,4 +1,4 @@
-import { ExternalLink, MapPin } from "lucide-react";
+import { MapPin, Navigation } from "lucide-react";
 import CopyButton from "@/components/CopyButton";
 import { mapLinks, wedding } from "@/data/wedding";
 
@@ -7,7 +7,7 @@ export default function VenueSection() {
     <section className="venue-section section-pad" id="venue">
       {/* 오시는 길 정보 */}
       <div className="section-copy">
-        <p className="soft-label">Location</p>
+        <p className="soft-label">오시는 길</p>
         <h2>{wedding.venue.name}</h2>
         <p>
           {wedding.venue.address}
@@ -16,33 +16,25 @@ export default function VenueSection() {
         </p>
       </div>
 
-      <div className="map-visual" aria-label="하우스 오브더라움 위치 안내">
-        {/* 위치 요약 지도 */}
-        <div className="map-line" />
-        <div className="map-point station-point">
-          <span>건대입구역</span>
-          <strong>5번 출구</strong>
-        </div>
-        <div className="map-point venue-point">
-          <MapPin size={18} />
-          <span>{wedding.venue.name}</span>
-          <strong>{wedding.venue.hall}</strong>
+      <div className="location-card">
+        {/* 위치 요약 */}
+        <MapPin className="location-mark" size={22} aria-hidden="true" />
+        <div>
+          <span>{wedding.venue.station}</span>
+          <strong>{wedding.venue.name}</strong>
+          <p>{wedding.venue.hall}</p>
         </div>
       </div>
 
       {/* 지도 앱 연결 */}
       <div className="map-actions">
         <a href={mapLinks.kakao} target="_blank">
-          <MapPin size={17} />
+          <Navigation className="action-icon" size={17} aria-hidden="true" />
           카카오맵
         </a>
         <a href={mapLinks.naver} target="_blank">
-          <MapPin size={17} />
+          <MapPin className="action-icon" size={17} aria-hidden="true" />
           네이버지도
-        </a>
-        <a href={mapLinks.google} target="_blank">
-          <ExternalLink size={17} />
-          구글맵
         </a>
         <CopyButton label="주소 복사" value={wedding.venue.address} />
       </div>

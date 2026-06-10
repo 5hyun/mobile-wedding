@@ -1,24 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { weddingConcepts } from "@/data/concepts";
-import { wedding } from "@/data/wedding";
-
-const conceptPhotos = weddingConcepts.flatMap((concept) =>
-  concept.photos.map((photo) => ({
-    ...photo,
-    conceptId: concept.id,
-    conceptTitle: concept.title,
-    conceptDescription: concept.description,
-  }))
-);
-
-/** 선택 사진의 전체 순서 조회 */
-function getConceptPhotoIndex(photoSrc: string) {
-  return conceptPhotos.findIndex((photo) => photo.src === photoSrc);
-}
+import { galleryPhotos } from "@/data/gallery";
 
 export default function GallerySection() {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
@@ -35,7 +20,7 @@ export default function GallerySection() {
         return currentIndex;
       }
 
-      return (currentIndex - 1 + conceptPhotos.length) % conceptPhotos.length;
+      return (currentIndex - 1 + galleryPhotos.length) % galleryPhotos.length;
     });
   };
 
@@ -46,7 +31,7 @@ export default function GallerySection() {
         return currentIndex;
       }
 
-      return (currentIndex + 1) % conceptPhotos.length;
+      return (currentIndex + 1) % galleryPhotos.length;
     });
   };
 
@@ -80,76 +65,53 @@ export default function GallerySection() {
   }, [selectedPhotoIndex]);
 
   const selectedPhoto =
-    selectedPhotoIndex === null ? null : conceptPhotos[selectedPhotoIndex];
+    selectedPhotoIndex === null ? null : galleryPhotos[selectedPhotoIndex] ?? null;
+  const selectedPhotoNumber = selectedPhotoIndex === null ? 0 : selectedPhotoIndex + 1;
 
   return (
     <section className="gallery-section section-pad" id="gallery">
-      {/* 컨셉별 사진 섹션 제목 */}
-      <div className="section-copy">
-        <p className="soft-label">Concept Archive</p>
-        <h2>의상과 장면이 바뀌는 순간들</h2>
+      {/* 선별 사진 섹션 제목 */}
+      <div className="section-copy centered">
+        <p className="soft-label">사진</p>
+        <h2>우리가 오래 보고 싶은 장면들</h2>
         <p>
-          의상과 공간이 바뀔 때마다 달라지는 공기를 조용히 이어 담았습니다.
+          조금씩 다른 빛과 표정 속에,
+          <br />
+          같은 마음을 담았습니다.
         </p>
-        <strong className="concept-count">
-          {weddingConcepts.length} scenes · {conceptPhotos.length} frames
-        </strong>
       </div>
 
-      {/* 컨셉별 사진 목록 */}
-      <div className="concept-list">
-        {weddingConcepts.map((concept, conceptIndex) => (
-          <article className="concept-card" key={concept.id}>
-            <div className="concept-heading">
-              <span>{String(conceptIndex + 1).padStart(2, "0")}</span>
-              <div>
-                <h3>{concept.title}</h3>
-                <p>{concept.description}</p>
-              </div>
-            </div>
-
-            <div className="concept-photo-grid">
-              {concept.photos.map((photo, photoIndex) => (
-                <button
-                  className={`concept-photo ${
-                    photoIndex === 0 ? "concept-photo-lead" : "concept-photo-sub"
-                  }`}
-                  key={photo.src}
-                  type="button"
-                  onClick={() => setSelectedPhotoIndex(getConceptPhotoIndex(photo.src))}
-                >
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    width={photo.width}
-                    height={photo.height}
-                    loading={conceptIndex < 2 ? "eager" : "lazy"}
-                    sizes="(max-width: 520px) 62vw, 280px"
-                    unoptimized
-                  />
-                </button>
-              ))}
-            </div>
-          </article>
+      {/* 선별 사진 목록 */}
+      <div className="gallery-grid" aria-label="선별 웨딩 사진">
+        {galleryPhotos.map((photo, photoIndex) => (
+          <button
+            className={`gallery-item gallery-item-${photo.mood}`}
+            key={photo.src}
+            type="button"
+            onClick={() => setSelectedPhotoIndex(photoIndex)}
+          >
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              loading={photoIndex < 4 ? "eager" : "lazy"}
+              sizes="(max-width: 520px) 50vw, 220px"
+              unoptimized
+            />
+          </button>
         ))}
       </div>
-
-      {/* 전체 앨범 연결 */}
-      <a className="album-link" href={wedding.albumUrl} target="_blank">
-        더 많은 사진 보기
-        <ExternalLink size={16} />
-      </a>
-      <p className="album-caption">Google Drive에서 열립니다.</p>
 
       {selectedPhoto ? (
         <div className="lightbox" role="dialog" aria-modal="true">
           {/* 상세 사진 */}
           <button className="lightbox-close" type="button" onClick={handleCloseClick}>
-            <X size={22} />
+            <X className="action-icon" size={22} aria-hidden="true" />
             <span className="sr-only">닫기</span>
           </button>
           <button className="lightbox-nav left" type="button" onClick={handlePreviousClick}>
-            <ChevronLeft size={24} />
+            <ChevronLeft className="action-icon" size={24} aria-hidden="true" />
             <span className="sr-only">이전 사진</span>
           </button>
           <figure className="lightbox-figure">
@@ -162,10 +124,12 @@ export default function GallerySection() {
               sizes="100vw"
               unoptimized
             />
-            <figcaption>{selectedPhoto.conceptTitle}</figcaption>
+            <figcaption>
+              {selectedPhotoNumber} / {galleryPhotos.length}
+            </figcaption>
           </figure>
           <button className="lightbox-nav right" type="button" onClick={handleNextClick}>
-            <ChevronRight size={24} />
+            <ChevronRight className="action-icon" size={24} aria-hidden="true" />
             <span className="sr-only">다음 사진</span>
           </button>
         </div>

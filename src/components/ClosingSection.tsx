@@ -18,11 +18,11 @@ export default function ClosingSection() {
 
       {/* 감사 문구 */}
       <div className="closing-copy">
-        <p>먼 길 함께해 주셔서 고맙습니다.</p>
+        <p>와 주시는 마음을 오래 기억하겠습니다.</p>
         <strong>
           {wedding.groom.shortName} · {wedding.bride.shortName}
         </strong>
-        <a href="#top">맨 위로</a>
+        <a href="#top">처음으로</a>
       </div>
     </section>
   );
