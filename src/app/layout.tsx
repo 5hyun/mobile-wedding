@@ -5,22 +5,22 @@ import "./globals.css";
 const notoSansKr = Noto_Sans_KR({
   variable: "--font-sans-kr",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500"],
 });
 
 const notoSerifKr = Noto_Serif_KR({
   variable: "--font-serif-kr",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://mobile-wedding.vercel.app"
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://mobile-wedding-sage.vercel.app"
   ),
   title: "오현과 혜선의 결혼식에 초대합니다",
   description:
-    "2026년 9월 5일 오후 5시, 하우스 오브더라움 2층 야호홀에서 권오현 박혜선의 결혼식이 열립니다.",
+    "소소한 일상을 나누며 함께 웃어 온 오현과 혜선의 첫걸음에 초대합니다.",
   openGraph: {
     title: "오현과 혜선의 결혼식에 초대합니다",
     description: "2026년 9월 5일 토요일 오후 5시, 하우스 오브더라움 2층 야호홀",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#faf7f1",
+  themeColor: "#f5f5f3",
 };
 
 export default function RootLayout({

@@ -57,7 +57,7 @@ export const mapLinks = {
   )}`,
   kakao: `https://map.kakao.com/link/search/${encodeURIComponent(
     `${wedding.venue.name} ${wedding.venue.address}`
-)}`,
+  )}`,
   google: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${wedding.venue.name} ${wedding.venue.address}`
   )}`,
@@ -67,7 +67,7 @@ export const mapLinks = {
 export const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
   `${wedding.groom.name} · ${wedding.bride.name} 결혼식`
 )}&dates=${wedding.date.calendarStartUtc}/${wedding.date.calendarEndUtc}&details=${encodeURIComponent(
-  "가까운 분들과 조용하고 기쁘게 나누고 싶은 날입니다. 따뜻한 마음으로 함께해 주세요."
+  "소소한 일상을 나누며 함께 웃을 때 가장 우리답다고 느꼈습니다. 두 사람의 첫걸음에 함께해 주세요."
 )}&location=${encodeURIComponent(
   `${wedding.venue.address} ${wedding.venue.name} ${wedding.venue.hall}`
 )}`;

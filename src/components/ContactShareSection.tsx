@@ -9,7 +9,7 @@ import { copyTextToClipboard } from "@/lib/clipboard";
 export default function ContactShareSection() {
   const [shareStatus, setShareStatus] = useState("");
   const [shareUrl, setShareUrl] = useState("");
-  const invitationTitle = `${wedding.groom.shortName}과 ${wedding.bride.shortName}의 결혼식에 초대합니다`;
+  const invitationTitle = `${wedding.groom.shortName} · ${wedding.bride.shortName} 결혼식`;
 
   useEffect(() => {
     setShareUrl(window.location.href);
@@ -22,7 +22,7 @@ export default function ContactShareSection() {
     if (navigator.share) {
       await navigator.share({
         title: invitationTitle,
-        text: `${wedding.date.display}, ${wedding.venue.name} ${wedding.venue.hall}에서 만나요.`,
+        text: `${wedding.date.display}, ${wedding.venue.name} ${wedding.venue.hall}`,
         url: currentShareUrl,
       });
       return;
@@ -37,7 +37,7 @@ export default function ContactShareSection() {
     <section className="contact-section section-pad">
       {/* 연락 및 공유 */}
       <div className="section-copy">
-        <p className="soft-label">연락처</p>
+        <p className="soft-label">Contact</p>
         <h2>편하게 연락 주세요</h2>
       </div>
 

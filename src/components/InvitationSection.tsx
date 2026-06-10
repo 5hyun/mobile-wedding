@@ -2,40 +2,52 @@ import Image from "next/image";
 import { photos } from "@/data/photos";
 
 export default function InvitationSection() {
-  const atelierPhoto = photos.find((photo) => photo.role === "intro") ?? photos[1];
-  const minimalPhoto = photos.find((photo) => photo.src.includes("soft-couple")) ?? photos[2];
-  const windowPhoto = photos.find((photo) => photo.src.includes("editorial")) ?? photos[3];
+  const introPhoto = photos.find((photo) => photo.role === "intro") ?? photos[1];
+  const storyPhotos = photos.filter((photo) => photo.role === "story");
+  const firstStoryPhoto = storyPhotos[0] ?? photos[2];
+  const secondStoryPhoto = storyPhotos[1] ?? photos[3];
 
   return (
     <section className="invitation-section section-pad">
       {/* 초대 문구 */}
       <div className="section-copy centered">
-        <p className="soft-label">초대합니다</p>
-        <h2>우리의 다음 계절에 초대합니다.</h2>
+        <p className="soft-label">Invitation</p>
+        <h2>우리답게, 같은 계절로</h2>
         <p>
-          서로에게 가장 다정한 편이 되어
+          소소한 일상을 나누고 함께 웃을 때
           <br />
-          천천히 같은 방향을 바라봅니다.
+          우리는 가장 우리다웠습니다.
           <br />
-          가까운 분들과 조용히 나누고 싶은 날,
+          앞으로 다가올 모든 계절을 함께 맞이할
           <br />
-          따뜻한 마음으로 함께해 주세요.
+          두 사람의 첫걸음에 함께해 주세요.
         </p>
       </div>
 
       {/* 컨셉 혼합 사진 */}
-      <div className="story-collage">
-        {[atelierPhoto, minimalPhoto, windowPhoto].map((photo, photoIndex) => (
-          <figure className={`story-frame story-frame-${photoIndex + 1}`} key={photo.src}>
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              width={photo.width}
-              height={photo.height}
-              sizes="(max-width: 520px) 64vw, 300px"
-            />
-          </figure>
-        ))}
+      <div className="story-gallery" aria-label="두 사람의 웨딩 사진">
+        <figure className="story-frame story-frame-large">
+          <Image
+            src={introPhoto.src}
+            alt={introPhoto.alt}
+            width={introPhoto.width}
+            height={introPhoto.height}
+            sizes="(max-width: 520px) 100vw, 480px"
+          />
+        </figure>
+        <div className="story-pair">
+          {[firstStoryPhoto, secondStoryPhoto].map((photo) => (
+            <figure className="story-frame" key={photo.src}>
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                width={photo.width}
+                height={photo.height}
+                sizes="(max-width: 520px) 48vw, 230px"
+              />
+            </figure>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -32,7 +32,7 @@ export default function CoupleSection() {
       {/* 혼주 및 신랑 신부 소개 */}
       <div className="section-copy">
         <p className="soft-label">두 사람</p>
-        <h2>양가의 마음을 담아 인사드립니다.</h2>
+        <h2>양가의 마음을 모아 인사드립니다.</h2>
       </div>
 
       <div className="family-list">
@@ -53,7 +53,7 @@ export default function CoupleSection() {
           <strong>딸 {wedding.bride.shortName}</strong>
         </div>
       </div>
-      <p className="memorial-note">❀ 마음에 함께하시는 어머님</p>
+      <p className="memorial-note">❀ 마음에 함께 모시는 어머님</p>
     </section>
   );
 }

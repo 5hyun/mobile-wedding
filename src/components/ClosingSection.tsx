@@ -18,7 +18,7 @@ export default function ClosingSection() {
 
       {/* 감사 문구 */}
       <div className="closing-copy">
-        <p>와 주시는 마음을 오래 기억하겠습니다.</p>
+        <p>함께해 주실 마음 오래 간직하겠습니다.</p>
         <strong>
           {wedding.groom.shortName} · {wedding.bride.shortName}
         </strong>

@@ -72,12 +72,12 @@ export default function GallerySection() {
     <section className="gallery-section section-pad" id="gallery">
       {/* 선별 사진 섹션 제목 */}
       <div className="section-copy centered">
-        <p className="soft-label">사진</p>
+        <p className="soft-label">Record</p>
         <h2>우리가 오래 보고 싶은 장면들</h2>
         <p>
           조금씩 다른 빛과 표정 속에,
           <br />
-          같은 마음을 담았습니다.
+          같은 마음을 남겼습니다.
         </p>
       </div>
 
@@ -104,7 +104,7 @@ export default function GallerySection() {
       </div>
 
       {selectedPhoto ? (
-        <div className="lightbox" role="dialog" aria-modal="true">
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기">
           {/* 상세 사진 */}
           <button className="lightbox-close" type="button" onClick={handleCloseClick}>
             <X className="action-icon" size={22} aria-hidden="true" />

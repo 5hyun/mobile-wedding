@@ -8,7 +8,7 @@ export default function WeddingInfoSection() {
       {/* 예식 정보 */}
       <div className="section-copy">
         <p className="soft-label">예식 안내</p>
-        <h2>2026년 9월 5일 토요일</h2>
+        <h2>2026.09.05</h2>
       </div>
 
       <div className="info-stack">
@@ -39,7 +39,7 @@ export default function WeddingInfoSection() {
 
       {/* 일정 저장 */}
       <div className="button-row">
-        <a className="primary-button" href={calendarUrl} target="_blank">
+        <a className="primary-button" href={calendarUrl} target="_blank" rel="noreferrer">
           <CalendarDays className="action-icon" size={17} aria-hidden="true" />
           일정 저장
         </a>
