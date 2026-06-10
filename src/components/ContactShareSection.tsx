@@ -22,7 +22,7 @@ export default function ContactShareSection() {
     if (navigator.share) {
       await navigator.share({
         title: invitationTitle,
-        text: `${wedding.date.display}, ${wedding.venue.name} ${wedding.venue.hall}`,
+        text: `서로의 하루를 곁에서 지키며 새로운 가정을 이루려 합니다. ${wedding.date.display} ${wedding.date.time}, ${wedding.venue.name} ${wedding.venue.hall} ${wedding.venue.floor}`,
         url: currentShareUrl,
       });
       return;
@@ -37,7 +37,7 @@ export default function ContactShareSection() {
     <section className="contact-section section-pad">
       {/* 연락 및 공유 */}
       <div className="section-copy">
-        <p className="soft-label">Contact</p>
+        <p className="soft-label">연락</p>
         <h2>편하게 연락 주세요</h2>
       </div>
 

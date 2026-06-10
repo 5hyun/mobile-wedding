@@ -6,11 +6,11 @@
   --ink: #2d2d2d;
   --muted: #6f6f6a;
   --soft: #8b8881;
-  --line: rgba(45, 45, 45, 0.12);
-  --line-strong: rgba(45, 45, 45, 0.2);
+  --line: rgba(45, 45, 45, 0.1);
+  --line-strong: rgba(45, 45, 45, 0.18);
   --accent: #7e8878;
   --accent-soft: #e3e7df;
-  --radius: 8px;
+  --radius: 6px;
   --page-width: 520px;
 }
 
@@ -63,7 +63,7 @@ img {
 }
 
 .section-pad {
-  padding: 112px 28px;
+  padding: 88px 28px 100px;
   border-top: 1px solid var(--line);
 }
 
@@ -82,18 +82,19 @@ img {
   margin: 0;
   color: var(--accent);
   font-family: var(--font-serif-kr), serif;
-  font-size: 0.76rem;
-  font-weight: 400;
+  font-size: 0.74rem;
+  font-weight: 500;
   line-height: 1.45;
   letter-spacing: 0;
+  word-spacing: 0.22em;
 }
 
 .section-copy h2 {
   margin: 0;
   font-family: var(--font-serif-kr), serif;
   font-size: 1.46rem;
-  font-weight: 400;
-  line-height: 1.62;
+  font-weight: 500;
+  line-height: 1.54;
   text-wrap: balance;
 }
 
@@ -102,7 +103,7 @@ img {
   color: var(--muted);
   font-size: 0.96rem;
   font-weight: 400;
-  line-height: 2.08;
+  line-height: 1.9;
   text-wrap: pretty;
 }
 
@@ -130,7 +131,7 @@ img {
   min-width: 0;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 9px;
   padding: 0 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -190,9 +191,10 @@ img {
 .hero-image-wrap {
   position: relative;
   width: 100%;
-  height: clamp(360px, 58svh, 560px);
+  height: clamp(340px, 50svh, 500px);
   margin: 0;
   overflow: hidden;
+  border-bottom: 1px solid var(--line);
   background: var(--accent-soft);
 }
 
@@ -206,35 +208,60 @@ img {
 .hero-copy {
   display: grid;
   justify-items: center;
-  padding: 42px 28px 104px;
+  padding: 36px 28px 92px;
   text-align: center;
 }
 
+.hero-title-stack {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+
+.hero-title-stack::before,
+.hero-title-stack::after {
+  display: block;
+  width: 56px;
+  height: 1px;
+  background: var(--line-strong);
+  content: "";
+}
+
+.hero-title-stack::before {
+  margin-bottom: 4px;
+}
+
+.hero-title-stack::after {
+  margin-top: 8px;
+}
+
 .hero-note {
-  margin: 0 0 38px;
+  margin: 24px 0 0;
   color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 2.05;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.78;
   word-break: keep-all;
 }
 
 .hero-date {
-  margin: 0 0 16px;
+  margin: 0;
   color: var(--accent);
   font-family: var(--font-serif-kr), serif;
-  font-size: 0.88rem;
-  font-weight: 400;
+  font-size: 0.82rem;
+  font-weight: 500;
   line-height: 1.5;
+  word-spacing: 0.22em;
 }
 
 .hero-copy h1 {
   display: grid;
   justify-items: center;
-  gap: 8px;
+  gap: 6px;
   margin: 0;
   font-family: var(--font-serif-kr), serif;
   font-size: 2.38rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.16;
   word-break: keep-all;
 }
@@ -242,25 +269,26 @@ img {
 .hero-copy h1 i {
   color: var(--soft);
   font-family: Georgia, serif;
-  font-size: 0.84rem;
+  font-size: 0.8rem;
   font-style: italic;
   line-height: 1.2;
 }
 
 .hero-venue {
-  margin: 22px 0 0;
+  margin: 4px 0 0;
   color: var(--muted);
   font-size: 0.92rem;
+  font-weight: 500;
   line-height: 1.86;
   word-break: keep-all;
 }
 
 .hero-actions {
   display: grid;
-  width: 100%;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(100%, 228px);
+  grid-template-columns: 1fr;
   gap: 8px;
-  margin-top: 34px;
+  margin-top: 28px;
 }
 
 .invitation-section,
@@ -277,7 +305,7 @@ img {
 .story-gallery {
   display: grid;
   gap: 8px;
-  margin-top: 64px;
+  margin-top: 52px;
 }
 
 .story-frame {
@@ -310,7 +338,7 @@ img {
 .family-list {
   display: grid;
   margin-top: 38px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-strong);
 }
 
 .family-row {
@@ -365,7 +393,7 @@ img {
 .info-stack {
   display: grid;
   margin-top: 42px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-strong);
 }
 
 .info-row {
@@ -405,7 +433,7 @@ img {
 
 .button-row,
 .share-row {
-  margin-top: 30px;
+  margin-top: 28px;
 }
 
 .gallery-grid {
@@ -413,7 +441,7 @@ img {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-flow: dense;
   gap: 8px;
-  margin-top: 48px;
+  margin-top: 44px;
 }
 
 .gallery-item {
@@ -454,8 +482,12 @@ img {
   align-items: start;
   margin-top: 42px;
   padding: 22px 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-strong);
   border-bottom: 1px solid var(--line);
+}
+
+.location-card > div {
+  min-width: 0;
 }
 
 .location-mark {
@@ -477,6 +509,7 @@ img {
   font-size: 1.12rem;
   font-weight: 400;
   line-height: 1.55;
+  overflow-wrap: anywhere;
 }
 
 .location-card p {
@@ -484,6 +517,7 @@ img {
   color: var(--muted);
   font-size: 0.92rem;
   line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 .map-actions,
@@ -494,7 +528,7 @@ img {
 .account-list {
   display: grid;
   margin-top: 42px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-strong);
 }
 
 .account-details {
@@ -726,15 +760,19 @@ img {
 
 @media (max-width: 430px) {
   .section-pad {
-    padding: 98px 22px;
+    padding: 84px 22px 94px;
   }
 
   .hero-copy {
-    padding: 38px 22px 96px;
+    padding: 36px 22px 86px;
   }
 
   .closing-copy {
-    padding: 38px 22px 98px;
+    padding: 36px 22px 94px;
+  }
+
+  .map-actions {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -746,10 +784,9 @@ img {
 
   .hero-image-wrap,
   .closing-section img {
-    height: clamp(330px, 54svh, 420px);
+    height: clamp(280px, 43svh, 350px);
   }
 
-  .hero-actions,
   .button-row,
   .share-row,
   .contact-grid,
@@ -778,11 +815,68 @@ img {
   }
 
   .hero-copy h1 {
-    font-size: 2.12rem;
+    font-size: 2.04rem;
   }
 
   .section-copy h2 {
     font-size: 1.34rem;
+  }
+}
+
+@media (max-width: 300px) {
+  .hero-image-wrap {
+    height: 250px;
+  }
+
+  .hero-copy {
+    padding-top: 30px;
+    padding-bottom: 76px;
+  }
+
+  .hero-actions {
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 360px) and (max-height: 680px) {
+  .hero-image-wrap {
+    height: 210px;
+  }
+
+  .hero-copy {
+    padding-top: 24px;
+    padding-bottom: 64px;
+  }
+
+  .hero-title-stack {
+    gap: 8px;
+  }
+
+  .hero-title-stack::before {
+    margin-bottom: 2px;
+  }
+
+  .hero-title-stack::after {
+    margin-top: 4px;
+  }
+
+  .hero-copy h1 {
+    font-size: 1.88rem;
+    line-height: 1.12;
+  }
+
+  .hero-venue {
+    font-size: 0.88rem;
+    line-height: 1.62;
+  }
+
+  .hero-note {
+    margin-top: 18px;
+    font-size: 0.86rem;
+  }
+
+  .hero-actions {
+    margin-top: 20px;
   }
 }
 

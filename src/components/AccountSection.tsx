@@ -6,7 +6,7 @@ export default function AccountSection() {
     <section className="account-section section-pad">
       {/* 축의금 계좌 */}
       <div className="section-copy centered">
-        <p className="soft-label">Thanks</p>
+        <p className="soft-label">마음</p>
         <h2>마음 전하실 곳</h2>
         <p>
           함께해 주시는 마음만으로 충분합니다.

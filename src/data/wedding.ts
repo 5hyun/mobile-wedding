@@ -20,17 +20,18 @@ export const wedding = {
   },
   date: {
     iso: "2026-09-05T17:00:00+09:00",
-    display: "2026년 9월 5일 토요일 오후 5시",
+    display: "2026년 9월 5일 토요일",
+    time: "오후 5시",
     compact: "2026.09.05 SAT · 5PM",
-    calendarStartUtc: "20260905T080000Z",
-    calendarEndUtc: "20260905T100000Z",
   },
   venue: {
-    name: "하우스 오브더라움",
-    hall: "2층 야호홀",
+    name: "하우스오브더라움",
+    hall: "벨루스홀",
+    floor: "B1F",
+    floorDetail: "지하 1층(B1F)",
     station: "건대입구역",
     address: "서울 광진구 능동로 81",
-    note: "건대입구역 5번 출구에서 가까운 거리",
+    note: "건대입구역 5번 출구 도보 2분",
   },
 } as const;
 
@@ -62,12 +63,3 @@ export const mapLinks = {
     `${wedding.venue.name} ${wedding.venue.address}`
   )}`,
 } as const;
-
-/** 구글 캘린더 일정 추가 주소 */
-export const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-  `${wedding.groom.name} · ${wedding.bride.name} 결혼식`
-)}&dates=${wedding.date.calendarStartUtc}/${wedding.date.calendarEndUtc}&details=${encodeURIComponent(
-  "소소한 일상을 나누며 함께 웃을 때 가장 우리답다고 느꼈습니다. 두 사람의 첫걸음에 함께해 주세요."
-)}&location=${encodeURIComponent(
-  `${wedding.venue.address} ${wedding.venue.name} ${wedding.venue.hall}`
-)}`;

@@ -11,16 +11,16 @@ export default function InvitationSection() {
     <section className="invitation-section section-pad">
       {/* 초대 문구 */}
       <div className="section-copy centered">
-        <p className="soft-label">Invitation</p>
-        <h2>우리답게, 같은 계절로</h2>
+        <p className="soft-label">초대</p>
+        <h2>두 사람이 함께 서는 날</h2>
         <p>
-          소소한 일상을 나누고 함께 웃을 때
+          권오현과 박혜선이
           <br />
-          우리는 가장 우리다웠습니다.
+          서로의 하루를 곁에서 지키며
           <br />
-          앞으로 다가올 모든 계절을 함께 맞이할
+          새로운 가정을 이루려 합니다.
           <br />
-          두 사람의 첫걸음에 함께해 주세요.
+          귀한 걸음으로 함께해 주시면 감사하겠습니다.
         </p>
       </div>
 

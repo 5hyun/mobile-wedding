@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { CalendarDays, MapPin } from "lucide-react";
-import { calendarUrl, mapLinks, wedding } from "@/data/wedding";
+import { MapPin } from "lucide-react";
+import { mapLinks, wedding } from "@/data/wedding";
 import { photos } from "@/data/photos";
 
 export default function HeroSection() {
@@ -23,34 +23,23 @@ export default function HeroSection() {
 
       {/* 첫 화면 정보 */}
       <div className="hero-copy">
-        <p className="hero-note">
-          소소한 일상을 나누며
-          <br />
-          함께 웃을 때 가장 우리답다고 느꼈습니다.
-        </p>
-        <p className="hero-date">{wedding.date.compact}</p>
-        <h1 aria-label={`${wedding.groom.name} 그리고 ${wedding.bride.name}`}>
-          <span>{wedding.groom.name}</span>
-          <i aria-hidden="true">and</i>
-          <span>{wedding.bride.name}</span>
-        </h1>
-        <p className="hero-venue">
-          {wedding.venue.name}
-          <br />
-          {wedding.venue.hall} · {wedding.venue.station}
-        </p>
+        <div className="hero-title-stack">
+          <p className="hero-date">{wedding.date.compact}</p>
+          <h1 aria-label={`${wedding.groom.name} 그리고 ${wedding.bride.name}`}>
+            <span>{wedding.groom.name}</span>
+            <i aria-hidden="true">and</i>
+            <span>{wedding.bride.name}</span>
+          </h1>
+          <p className="hero-venue">
+            {wedding.venue.name}
+            <br />
+            {wedding.venue.hall} · {wedding.venue.floor} · {wedding.venue.station}
+          </p>
+        </div>
+        <p className="hero-note">두 사람이 함께 서는 날</p>
         <div className="hero-actions">
           <a
             className="text-action primary-action"
-            href={calendarUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <CalendarDays className="action-icon" size={17} aria-hidden="true" />
-            일정 저장
-          </a>
-          <a
-            className="text-action"
             href={mapLinks.kakao}
             target="_blank"
             rel="noreferrer"

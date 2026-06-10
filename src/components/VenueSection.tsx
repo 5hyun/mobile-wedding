@@ -12,7 +12,7 @@ export default function VenueSection() {
         <p>
           {wedding.venue.address}
           <br />
-          {wedding.venue.hall} · 건대입구역 5번 출구에서 가깝습니다.
+          {wedding.venue.hall} · {wedding.venue.floorDetail} · {wedding.venue.note}
         </p>
       </div>
 
@@ -22,7 +22,9 @@ export default function VenueSection() {
         <div>
           <span>{wedding.venue.station}</span>
           <strong>{wedding.venue.name}</strong>
-          <p>{wedding.venue.hall}</p>
+          <p>
+            {wedding.venue.hall} · {wedding.venue.floorDetail}
+          </p>
         </div>
       </div>
 
@@ -36,7 +38,10 @@ export default function VenueSection() {
           <MapPin className="action-icon" size={17} aria-hidden="true" />
           네이버지도
         </a>
-        <CopyButton label="주소 복사" value={wedding.venue.address} />
+        <CopyButton
+          label="주소 복사"
+          value={`${wedding.venue.address} ${wedding.venue.name} ${wedding.venue.hall} ${wedding.venue.floorDetail}`}
+        />
       </div>
     </section>
   );

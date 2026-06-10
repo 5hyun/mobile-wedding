@@ -20,10 +20,11 @@ export const metadata: Metadata = {
   ),
   title: "오현과 혜선의 결혼식에 초대합니다",
   description:
-    "소소한 일상을 나누며 함께 웃어 온 오현과 혜선의 첫걸음에 초대합니다.",
+    "서로의 하루를 곁에서 지키며 새로운 가정을 이루려는 오현과 혜선의 결혼식에 초대합니다.",
   openGraph: {
     title: "오현과 혜선의 결혼식에 초대합니다",
-    description: "2026년 9월 5일 토요일 오후 5시, 하우스 오브더라움 2층 야호홀",
+    description:
+      "2026년 9월 5일 토요일 오후 5시, 하우스오브더라움 벨루스홀 B1F",
     type: "website",
     locale: "ko_KR",
     siteName: "오현 · 혜선 모바일 청첩장",
@@ -39,7 +40,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "오현과 혜선의 결혼식에 초대합니다",
-    description: "2026년 9월 5일 토요일 오후 5시, 하우스 오브더라움 2층 야호홀",
+    description:
+      "2026년 9월 5일 토요일 오후 5시, 하우스오브더라움 벨루스홀 B1F",
     images: ["/images/og/wedding-og.jpg"],
   },
 };

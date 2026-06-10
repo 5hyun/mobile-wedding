@@ -72,12 +72,12 @@ export default function GallerySection() {
     <section className="gallery-section section-pad" id="gallery">
       {/* 선별 사진 섹션 제목 */}
       <div className="section-copy centered">
-        <p className="soft-label">Record</p>
+        <p className="soft-label">사진</p>
         <h2>우리가 오래 보고 싶은 장면들</h2>
         <p>
-          조금씩 다른 빛과 표정 속에,
+          다정한 빛과 계절의 온도를
           <br />
-          같은 마음을 남겼습니다.
+          오래 간직하고 싶어 골랐습니다.
         </p>
       </div>
 
