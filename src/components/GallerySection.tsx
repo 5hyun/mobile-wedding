@@ -36,6 +36,25 @@ const lightboxPhotoTransition = {
 
 const swipeConfidenceThreshold = 7800;
 const getSwipePower = (offset: number, velocity: number) => Math.abs(offset) * velocity;
+const lightboxPreloadOffsets = [-2, -1, 1, 2] as const;
+const wideGalleryPhotoIndices = new Set([0, 7, 14]);
+const lightboxImageSizes = "(max-width: 596px) calc(100vw - 36px), 560px";
+
+const getGalleryImageSizes = (photoIndex: number) =>
+  wideGalleryPhotoIndices.has(photoIndex)
+    ? "(max-width: 520px) 100vw, 480px"
+    : "(max-width: 520px) 50vw, 220px";
+
+/** 현재 사진 주변 이미지를 미리 데워 부드럽게 넘기기 위한 목록 */
+const getLightboxPreloadPhotos = (currentIndex: number) => {
+  const preloadIndices = new Set<number>();
+
+  lightboxPreloadOffsets.forEach((offset) => {
+    preloadIndices.add((currentIndex + offset + galleryPhotos.length) % galleryPhotos.length);
+  });
+
+  return Array.from(preloadIndices, (photoIndex) => galleryPhotos[photoIndex]);
+};
 
 export default function GallerySection() {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
@@ -99,6 +118,8 @@ export default function GallerySection() {
   const selectedPhoto =
     selectedPhotoIndex === null ? null : galleryPhotos[selectedPhotoIndex] ?? null;
   const selectedPhotoNumber = selectedPhotoIndex === null ? 0 : selectedPhotoIndex + 1;
+  const preloadedLightboxPhotos =
+    selectedPhotoIndex === null ? [] : getLightboxPreloadPhotos(selectedPhotoIndex);
 
   return (
     <section className="gallery-section section-pad" id="gallery">
@@ -128,8 +149,7 @@ export default function GallerySection() {
               width={photo.width}
               height={photo.height}
               loading={photoIndex < 4 ? "eager" : "lazy"}
-              sizes="(max-width: 520px) 50vw, 220px"
-              unoptimized
+              sizes={getGalleryImageSizes(photoIndex)}
             />
           </button>
         ))}
@@ -177,9 +197,8 @@ export default function GallerySection() {
                     width={selectedPhoto.width}
                     height={selectedPhoto.height}
                     className="lightbox-image"
-                    sizes="100vw"
-                    priority
-                    unoptimized
+                    sizes={lightboxImageSizes}
+                    loading="eager"
                   />
                 </motion.div>
               </AnimatePresence>
@@ -193,6 +212,19 @@ export default function GallerySection() {
             <ChevronRight className="action-icon" size={24} aria-hidden="true" />
             <span className="sr-only">다음 사진</span>
           </button>
+          <div className="lightbox-preload" aria-hidden="true">
+            {preloadedLightboxPhotos.map((photo) => (
+              <Image
+                key={`lightbox-preload-${photo.src}`}
+                src={photo.src}
+                alt=""
+                width={photo.width}
+                height={photo.height}
+                loading="eager"
+                sizes={lightboxImageSizes}
+              />
+            ))}
+          </div>
         </div>
       ) : null}
     </section>

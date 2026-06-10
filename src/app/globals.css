@@ -905,7 +905,7 @@ img {
 .lightbox-image {
   width: auto;
   max-width: min(100%, 560px);
-  max-height: 100%;
+  max-height: min(calc(100svh - 168px), 74svh);
   border-radius: var(--radius);
   object-fit: contain;
 }
@@ -968,6 +968,22 @@ img {
 
 .lightbox-nav.right {
   right: calc(18px + env(safe-area-inset-right));
+}
+
+.lightbox-preload {
+  position: fixed;
+  left: -100vw;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lightbox-preload img {
+  width: 1px;
+  height: 1px;
 }
 
 .sr-only {
