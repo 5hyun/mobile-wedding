@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useSwipeable } from "react-swipeable";
 import { galleryPhotos } from "@/data/gallery";
 
 export default function GallerySection() {
@@ -67,6 +68,13 @@ export default function GallerySection() {
   const selectedPhoto =
     selectedPhotoIndex === null ? null : galleryPhotos[selectedPhotoIndex] ?? null;
   const selectedPhotoNumber = selectedPhotoIndex === null ? 0 : selectedPhotoIndex + 1;
+  const swipeHandlers = useSwipeable({
+    delta: 36,
+    preventScrollOnSwipe: true,
+    trackMouse: true,
+    onSwipedLeft: handleNextClick,
+    onSwipedRight: handlePreviousClick,
+  });
 
   return (
     <section className="gallery-section section-pad" id="gallery">
@@ -114,7 +122,7 @@ export default function GallerySection() {
             <ChevronLeft className="action-icon" size={24} aria-hidden="true" />
             <span className="sr-only">이전 사진</span>
           </button>
-          <figure className="lightbox-figure">
+          <figure className="lightbox-figure" {...swipeHandlers}>
             <Image
               src={selectedPhoto.src}
               alt={selectedPhoto.alt}
@@ -126,6 +134,7 @@ export default function GallerySection() {
             />
             <figcaption>
               {selectedPhotoNumber} / {galleryPhotos.length}
+              <span className="sr-only">좌우로 밀어 사진을 넘길 수 있습니다.</span>
             </figcaption>
           </figure>
           <button className="lightbox-nav right" type="button" onClick={handleNextClick}>

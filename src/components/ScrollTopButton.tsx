@@ -17,14 +17,19 @@ export default function ScrollTopButton() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleScrollTopClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <a
+    <button
       className={`scroll-top-button${isVisible ? " is-visible" : ""}`}
-      href="#top"
+      type="button"
+      onClick={handleScrollTopClick}
       aria-label="맨 위로 이동"
     >
       <ArrowUp className="action-icon" size={17} aria-hidden="true" />
       <span>맨 위로</span>
-    </a>
+    </button>
   );
 }

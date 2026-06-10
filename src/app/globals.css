@@ -758,6 +758,7 @@ img {
   right: max(18px, calc((100vw - var(--page-width)) / 2 + 18px));
   bottom: calc(18px + env(safe-area-inset-bottom));
   z-index: 20;
+  appearance: none;
   display: inline-flex;
   min-height: 42px;
   align-items: center;
@@ -795,6 +796,8 @@ img {
   justify-items: center;
   gap: 14px;
   margin: 0;
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .lightbox-figure figcaption {
