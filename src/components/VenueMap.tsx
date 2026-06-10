@@ -2,14 +2,20 @@
 
 import { MapPin } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import Feature from "ol/Feature.js";
 import Map from "ol/Map.js";
 import Overlay from "ol/Overlay.js";
 import View from "ol/View.js";
 import { defaults as defaultControls } from "ol/control/defaults.js";
 import { boundingExtent } from "ol/extent.js";
+import LineString from "ol/geom/LineString.js";
 import TileLayer from "ol/layer/Tile.js";
+import VectorLayer from "ol/layer/Vector.js";
 import { fromLonLat } from "ol/proj.js";
+import VectorSource from "ol/source/Vector.js";
 import XYZ from "ol/source/XYZ.js";
+import Stroke from "ol/style/Stroke.js";
+import Style from "ol/style/Style.js";
 import { wedding } from "@/data/wedding";
 
 const venueCoordinate = fromLonLat([
@@ -24,35 +30,82 @@ const exitCoordinate = fromLonLat([
   wedding.venue.exitCoordinates.lng,
   wedding.venue.exitCoordinates.lat,
 ]);
-const mapFocusExtent = boundingExtent([venueCoordinate, stationCoordinate, exitCoordinate]);
+const walkingRouteCoordinates = [
+  exitCoordinate,
+  fromLonLat([127.07004, 37.53952]),
+  fromLonLat([127.06974, 37.53893]),
+  venueCoordinate,
+];
+const routeLabelCoordinate = fromLonLat([127.06978, 37.53913]);
+const mapFocusExtent = boundingExtent([
+  venueCoordinate,
+  stationCoordinate,
+  exitCoordinate,
+  ...walkingRouteCoordinates,
+]);
 
 export default function VenueMap() {
   const mapRef = useRef<HTMLDivElement>(null);
   const markerRef = useRef<HTMLDivElement>(null);
+  const venueLabelRef = useRef<HTMLDivElement>(null);
   const stationLabelRef = useRef<HTMLDivElement>(null);
   const exitLabelRef = useRef<HTMLDivElement>(null);
+  const routeLabelRef = useRef<HTMLDivElement>(null);
   const [hasMapError, setHasMapError] = useState(false);
 
   useEffect(() => {
-    if (!mapRef.current || !markerRef.current || !stationLabelRef.current || !exitLabelRef.current) {
+    if (
+      !mapRef.current ||
+      !markerRef.current ||
+      !venueLabelRef.current ||
+      !stationLabelRef.current ||
+      !exitLabelRef.current ||
+      !routeLabelRef.current
+    ) {
       return;
     }
 
+    const tilePixelRatio = window.devicePixelRatio >= 1.5 ? 2 : 1;
+    const tileSuffix = tilePixelRatio === 2 ? "@2x" : "";
     const tileSource = new XYZ({
       attributions:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       crossOrigin: "anonymous",
       maxZoom: 20,
+      tilePixelRatio,
       transition: 180,
-      url: "https://{a-d}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
+      url: `https://{a-d}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}${tileSuffix}.png`,
     });
     const tileLayer = new TileLayer({
       source: tileSource,
+    });
+    const routeLayer = new VectorLayer({
+      source: new VectorSource({
+        features: [
+          new Feature({
+            geometry: new LineString(walkingRouteCoordinates),
+          }),
+        ],
+      }),
+      style: new Style({
+        stroke: new Stroke({
+          color: "rgba(52, 71, 53, 0.84)",
+          lineCap: "round",
+          lineDash: [7, 7],
+          width: 3,
+        }),
+      }),
     });
     const marker = new Overlay({
       element: markerRef.current,
       offset: [0, -10],
       positioning: "bottom-center",
+      stopEvent: false,
+    });
+    const venueLabel = new Overlay({
+      element: venueLabelRef.current,
+      offset: [0, 10],
+      positioning: "top-center",
       stopEvent: false,
     });
     const stationLabel = new Overlay({
@@ -65,6 +118,12 @@ export default function VenueMap() {
       element: exitLabelRef.current,
       offset: [30, -4],
       positioning: "bottom-center",
+      stopEvent: false,
+    });
+    const routeLabel = new Overlay({
+      element: routeLabelRef.current,
+      offset: [-34, -22],
+      positioning: "center-center",
       stopEvent: false,
     });
     const view = new View({
@@ -80,20 +139,22 @@ export default function VenueMap() {
         rotate: false,
         zoom: false,
       }),
-      layers: [tileLayer],
-      overlays: [stationLabel, exitLabel, marker],
+      layers: [tileLayer, routeLayer],
+      overlays: [stationLabel, exitLabel, routeLabel, venueLabel, marker],
       target: mapRef.current,
       view,
     });
     marker.setPosition(venueCoordinate);
+    venueLabel.setPosition(venueCoordinate);
     stationLabel.setPosition(stationCoordinate);
     exitLabel.setPosition(exitCoordinate);
+    routeLabel.setPosition(routeLabelCoordinate);
 
     const fitFrame = window.requestAnimationFrame(() => {
       view.fit(mapFocusExtent, {
         duration: 0,
-        maxZoom: 17.35,
-        padding: [62, 46, 58, 46],
+        maxZoom: 17.55,
+        padding: [72, 44, 84, 44],
         size: map.getSize(),
       });
     });
@@ -116,6 +177,12 @@ export default function VenueMap() {
       <div ref={markerRef} className="venue-map-marker" aria-hidden="true">
         <MapPin size={26} />
       </div>
+      <div ref={venueLabelRef} className="venue-map-label venue-map-venue" aria-hidden="true">
+        <strong>{wedding.venue.name}</strong>
+        <span>
+          {wedding.venue.hall} · {wedding.venue.floor}
+        </span>
+      </div>
       <div ref={stationLabelRef} className="venue-map-label venue-map-station" aria-hidden="true">
         <strong>{wedding.venue.station}</strong>
         <span>{wedding.venue.subwayLine}</span>
@@ -123,6 +190,9 @@ export default function VenueMap() {
       <div ref={exitLabelRef} className="venue-map-label venue-map-exit" aria-hidden="true">
         <span>5</span>
         <strong>{wedding.venue.exit}</strong>
+      </div>
+      <div ref={routeLabelRef} className="venue-map-label venue-map-route" aria-hidden="true">
+        출구에서 {wedding.venue.walk}
       </div>
       {hasMapError ? (
         <div className="venue-map-error" aria-live="polite">

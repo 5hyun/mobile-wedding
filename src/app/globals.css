@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @source "../components";
-@source inline("venue-map-card venue-map-canvas venue-map-marker venue-map-error");
+@source inline("venue-map-card venue-map-canvas venue-map-marker venue-map-error venue-map-label venue-map-venue venue-map-station venue-map-exit venue-map-route");
 
 :root {
   --bg: #f4f1ea;
@@ -590,7 +590,7 @@ img {
 
 .venue-map-card {
   position: relative;
-  min-height: clamp(236px, 54vw, 304px);
+  min-height: clamp(278px, 66vw, 360px);
   margin-top: 38px;
   overflow: hidden;
   border: 1px solid rgba(52, 71, 53, 0.14);
@@ -601,19 +601,19 @@ img {
 
 .venue-map-canvas {
   width: 100%;
-  height: clamp(236px, 54vw, 304px);
+  height: clamp(278px, 66vw, 360px);
 }
 
 .venue-map-card .ol-layer canvas {
-  filter: saturate(0.7) contrast(0.94) brightness(1.04) sepia(0.05);
+  filter: saturate(0.96) contrast(1.03) brightness(1.01);
 }
 
 .venue-map-marker {
   display: grid;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   place-items: center;
-  border: 3px solid var(--surface);
+  border: 2px solid var(--surface);
   border-radius: 999px;
   background: linear-gradient(180deg, #cf8a8d 0%, #b96d73 100%);
   color: var(--surface);
@@ -623,8 +623,8 @@ img {
 }
 
 .venue-map-marker svg {
-  width: 22px;
-  height: 22px;
+  width: 21px;
+  height: 21px;
   stroke-width: 2;
 }
 
@@ -654,6 +654,24 @@ img {
   font-size: 0.64rem;
 }
 
+.venue-map-venue {
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px 7px;
+  border-color: rgba(127, 63, 77, 0.24);
+  border-radius: var(--radius);
+  background: rgba(127, 63, 77, 0.94);
+  color: var(--surface);
+  font-size: 0.74rem;
+  text-align: center;
+}
+
+.venue-map-venue span {
+  color: rgba(255, 253, 248, 0.76);
+  font-size: 0.64rem;
+}
+
 .venue-map-exit {
   padding: 6px 9px 6px 6px;
   border-color: rgba(255, 253, 248, 0.48);
@@ -672,6 +690,14 @@ img {
   color: var(--accent-deep);
   font-size: 0.72rem;
   font-weight: 600;
+}
+
+.venue-map-route {
+  padding: 6px 9px;
+  border-color: rgba(183, 154, 100, 0.24);
+  background: rgba(255, 253, 248, 0.94);
+  color: var(--accent-wine);
+  font-size: 0.7rem;
 }
 
 .venue-map-error {
@@ -1028,21 +1054,12 @@ img {
 .lightbox-close {
   top: calc(16px + env(safe-area-inset-top));
   right: calc(16px + env(safe-area-inset-right));
-  width: 46px;
-  height: 46px;
-  border-color: rgba(255, 253, 248, 0.32);
-  background:
-    linear-gradient(180deg, rgba(255, 253, 248, 0.2), rgba(255, 253, 248, 0.1)),
-    rgba(37, 40, 35, 0.18);
-}
-
-.lightbox-close::after {
-  position: absolute;
-  inset: 7px;
-  border: 1px solid rgba(255, 253, 248, 0.16);
-  border-radius: inherit;
-  content: "";
-  pointer-events: none;
+  width: 44px;
+  height: 44px;
+  border-color: rgba(255, 253, 248, 0.34);
+  background: rgba(37, 40, 35, 0.34);
+  color: #fffdf8;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
 }
 
 .lightbox-close .action-icon {
