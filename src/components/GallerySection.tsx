@@ -8,16 +8,16 @@ import { galleryPhotos } from "@/data/gallery";
 
 const lightboxPhotoVariants = {
   enter: (direction: number) => ({
-    opacity: 0.72,
-    x: direction > 0 ? "100%" : "-100%",
+    opacity: 1,
+    x: direction > 0 ? "100vw" : "-100vw",
   }),
   center: {
     opacity: 1,
     x: "0%",
   },
   exit: (direction: number) => ({
-    opacity: 0.72,
-    x: direction > 0 ? "-100%" : "100%",
+    opacity: 1,
+    x: direction > 0 ? "-100vw" : "100vw",
   }),
 };
 

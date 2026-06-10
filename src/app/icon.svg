@@ -1,9 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="오현과 혜선 모바일 청첩장">
-  <rect width="64" height="64" rx="14" fill="#f4f1ea" />
-  <circle cx="32" cy="32" r="22" fill="#344735" />
-  <path d="M30.9 20.2C22 21.2 16.6 27.6 19.3 36.2C25.4 35.5 31 30.7 30.9 20.2Z" fill="#fffdf8" />
-  <path d="M33.1 20.2C42 21.2 47.4 27.6 44.7 36.2C38.6 35.5 33 30.7 33.1 20.2Z" fill="#fffdf8" />
-  <path d="M22.5 40.8C26.8 48.1 37.2 48.1 41.5 40.8C37.2 38.5 26.8 38.5 22.5 40.8Z" fill="#e9eee4" />
-  <circle cx="32" cy="35.2" r="4.8" fill="#c67f82" />
-  <circle cx="32" cy="35.2" r="6.2" fill="none" stroke="#b79a64" stroke-width="1.2" opacity="0.72" />
+  <rect width="64" height="64" rx="16" fill="#f4f1ea" />
+  <circle cx="32" cy="32" r="23" fill="#344735" />
+  <circle cx="26.5" cy="34" r="9.4" fill="none" stroke="#fffdf8" stroke-width="5.2" />
+  <circle cx="37.5" cy="34" r="9.4" fill="none" stroke="#fffdf8" stroke-width="5.2" />
+  <path d="M31.2 19.8C35.8 15.9 41.6 14.9 47 17.2C44.6 22.7 39.4 25.8 32.9 25.1C32.3 23.6 31.8 21.9 31.2 19.8Z" fill="#dce6d7" />
+  <path d="M26.4 22.7C23.1 20.8 20.8 17.9 19.7 14.2C24.2 13.7 28.1 15.3 31.2 19.1C30 20.6 28.4 21.8 26.4 22.7Z" fill="#b79a64" />
+  <circle cx="32" cy="34" r="3.8" fill="#c67f82" />
+  <circle cx="32" cy="34" r="22.4" fill="none" stroke="#b79a64" stroke-width="1.4" opacity="0.72" />
 </svg>

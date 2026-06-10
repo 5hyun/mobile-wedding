@@ -63,7 +63,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${notoSansKr.variable} ${notoSerifKr.variable}`}>
+    <html
+      lang="ko"
+      className={`${notoSansKr.variable} ${notoSerifKr.variable}`}
+      suppressHydrationWarning
+    >
       <body>{children}</body>
     </html>
   );
