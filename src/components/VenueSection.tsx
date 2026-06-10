@@ -30,13 +30,13 @@ export default function VenueSection() {
 
       {/* 지도 앱 연결 */}
       <div className="map-actions">
-        <a href={mapLinks.kakao} target="_blank" rel="noreferrer">
-          <Navigation className="action-icon" size={17} aria-hidden="true" />
-          카카오맵
-        </a>
         <a href={mapLinks.naver} target="_blank" rel="noreferrer">
           <MapPin className="action-icon" size={17} aria-hidden="true" />
           네이버지도
+        </a>
+        <a href={mapLinks.kakao} target="_blank" rel="noreferrer">
+          <Navigation className="action-icon" size={17} aria-hidden="true" />
+          카카오맵
         </a>
         <CopyButton
           label="주소 복사"

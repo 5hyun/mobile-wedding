@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ),
   title: "오현과 혜선의 결혼식에 초대합니다",
   description:
-    "서로의 하루를 곁에서 지키며 새로운 가정을 이루려는 오현과 혜선의 결혼식에 초대합니다.",
+    "2026년 9월 5일 토요일 오후 5시, 하우스오브더라움 벨루스홀에서 뵙겠습니다.",
   openGraph: {
     title: "오현과 혜선의 결혼식에 초대합니다",
     description:

@@ -6,31 +6,39 @@ export default function AccountSection() {
     <section className="account-section section-pad">
       {/* 축의금 계좌 */}
       <div className="section-copy centered">
-        <p className="soft-label">마음</p>
-        <h2>마음 전하실 곳</h2>
+        <p className="soft-label">축하</p>
+        <h2>축하의 마음 전하실 곳</h2>
         <p>
-          함께해 주시는 마음만으로 충분합니다.
+          참석만으로도 큰 축복입니다.
           <br />
-          멀리서 축하를 전하고 싶으신 분들을 위해 안내드립니다.
+          멀리서 마음 전하실 분들을 위해 안내드립니다.
         </p>
       </div>
 
       <div className="account-list">
-        {accountGroups.map((account) => (
-          <details className="account-details" key={`${account.side}-${account.owner}`}>
-            <summary>{account.side}</summary>
-            <div className="account-body">
-              <p>
-                <span>{account.bank}</span>
-                <strong>{account.number}</strong>
-                <em>{account.owner}</em>
-              </p>
-              <CopyButton
-                label="계좌번호 복사"
-                value={`${account.bank} ${account.number} ${account.owner}`}
-              />
+        {accountGroups.map((group) => (
+          <section className="account-group" key={group.side} aria-label={`${group.side} 계좌`}>
+            <h3>{group.side}</h3>
+            <div className="account-items">
+              {group.accounts.map((account) => (
+                <article className="account-item" key={`${group.side}-${account.owner}`}>
+                  <div>
+                    <span>{account.relation}</span>
+                    <strong>{account.bank}</strong>
+                    <p>
+                      {account.number}
+                      <br />
+                      {account.owner}
+                    </p>
+                  </div>
+                  <CopyButton
+                    label="복사"
+                    value={`${account.bank} ${account.number} ${account.owner}`}
+                  />
+                </article>
+              ))}
             </div>
-          </details>
+          </section>
         ))}
       </div>
     </section>

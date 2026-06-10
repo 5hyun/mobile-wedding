@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MapPin } from "lucide-react";
+import { CalendarDays, MapPin } from "lucide-react";
 import { mapLinks, wedding } from "@/data/wedding";
 import { photos } from "@/data/photos";
 
@@ -36,11 +36,15 @@ export default function HeroSection() {
             {wedding.venue.hall} · {wedding.venue.floor} · {wedding.venue.station}
           </p>
         </div>
-        <p className="hero-note">두 사람이 함께 서는 날</p>
+        <p className="hero-note">결혼식에 초대합니다</p>
         <div className="hero-actions">
+          <a className="text-action primary-action" href="#wedding-info">
+            <CalendarDays className="action-icon" size={17} aria-hidden="true" />
+            일정 보기
+          </a>
           <a
-            className="text-action primary-action"
-            href={mapLinks.kakao}
+            className="text-action"
+            href={mapLinks.naver}
             target="_blank"
             rel="noreferrer"
           >

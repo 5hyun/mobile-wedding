@@ -12,15 +12,15 @@ export default function InvitationSection() {
       {/* 초대 문구 */}
       <div className="section-copy centered">
         <p className="soft-label">초대</p>
-        <h2>두 사람이 함께 서는 날</h2>
+        <h2>결혼합니다</h2>
         <p>
           권오현과 박혜선이
           <br />
-          서로의 하루를 곁에서 지키며
+          서로의 곁에서
           <br />
           새로운 가정을 이루려 합니다.
           <br />
-          귀한 걸음으로 함께해 주시면 감사하겠습니다.
+          오셔서 축복해 주시면 감사하겠습니다.
         </p>
       </div>
 

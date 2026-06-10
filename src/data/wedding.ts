@@ -39,26 +39,50 @@ export const wedding = {
 export const accountGroups = [
   {
     side: "신랑 측",
-    owner: "권오현",
-    bank: "국민은행",
-    number: "000000-00-000000",
+    accounts: [
+      {
+        relation: "신랑",
+        owner: "권오현",
+        bank: "국민은행",
+        number: "000000-00-000000",
+      },
+      {
+        relation: "신랑 아버지",
+        owner: "권영호",
+        bank: "우리은행",
+        number: "0000-000-000000",
+      },
+    ],
   },
   {
     side: "신부 측",
-    owner: "박혜선",
-    bank: "신한은행",
-    number: "000-000-000000",
+    accounts: [
+      {
+        relation: "신부",
+        owner: "박혜선",
+        bank: "신한은행",
+        number: "000-000-000000",
+      },
+      {
+        relation: "신부 아버지",
+        owner: "박정필",
+        bank: "하나은행",
+        number: "000-000000-00000",
+      },
+      {
+        relation: "신부 어머니",
+        owner: "김은자",
+        bank: "농협은행",
+        number: "000-00-000000",
+      },
+    ],
   },
 ] as const;
 
 /** 지도 앱 연결 정보 */
 export const mapLinks = {
-  naver: `https://map.naver.com/p/search/${encodeURIComponent(
-    `${wedding.venue.name} ${wedding.venue.address}`
-  )}`,
-  kakao: `https://map.kakao.com/link/search/${encodeURIComponent(
-    `${wedding.venue.name} ${wedding.venue.address}`
-  )}`,
+  naver: "https://naver.me/GbDMwi5B",
+  kakao: "https://place.map.kakao.com/435680876",
   google: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${wedding.venue.name} ${wedding.venue.address}`
   )}`,
