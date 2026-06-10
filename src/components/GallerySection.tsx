@@ -2,12 +2,32 @@
 
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import { galleryPhotos } from "@/data/gallery";
 
+const lightboxPhotoVariants = {
+  enter: (direction: number) => ({
+    opacity: 0,
+    scale: 0.985,
+    x: direction > 0 ? 42 : -42,
+  }),
+  center: {
+    opacity: 1,
+    scale: 1,
+    x: 0,
+  },
+  exit: (direction: number) => ({
+    opacity: 0,
+    scale: 0.985,
+    x: direction > 0 ? -42 : 42,
+  }),
+};
+
 export default function GallerySection() {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
+  const [slideDirection, setSlideDirection] = useState<1 | -1>(1);
 
   /** 사진 상세 닫기 처리 */
   const handleCloseClick = () => {
@@ -16,6 +36,7 @@ export default function GallerySection() {
 
   /** 이전 사진 이동 처리 */
   const handlePreviousClick = () => {
+    setSlideDirection(-1);
     setSelectedPhotoIndex((currentIndex) => {
       if (currentIndex === null) {
         return currentIndex;
@@ -27,6 +48,7 @@ export default function GallerySection() {
 
   /** 다음 사진 이동 처리 */
   const handleNextClick = () => {
+    setSlideDirection(1);
     setSelectedPhotoIndex((currentIndex) => {
       if (currentIndex === null) {
         return currentIndex;
@@ -123,15 +145,35 @@ export default function GallerySection() {
             <span className="sr-only">이전 사진</span>
           </button>
           <figure className="lightbox-figure" {...swipeHandlers}>
-            <Image
-              src={selectedPhoto.src}
-              alt={selectedPhoto.alt}
-              width={selectedPhoto.width}
-              height={selectedPhoto.height}
-              className="lightbox-image"
-              sizes="100vw"
-              unoptimized
-            />
+            <div className="lightbox-photo-stage" aria-live="polite">
+              <AnimatePresence custom={slideDirection} initial={false}>
+                <motion.div
+                  className="lightbox-photo-frame"
+                  key={selectedPhoto.src}
+                  custom={slideDirection}
+                  variants={lightboxPhotoVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    type: "spring",
+                    stiffness: 360,
+                    damping: 34,
+                    mass: 0.72,
+                  }}
+                >
+                  <Image
+                    src={selectedPhoto.src}
+                    alt={selectedPhoto.alt}
+                    width={selectedPhoto.width}
+                    height={selectedPhoto.height}
+                    className="lightbox-image"
+                    sizes="100vw"
+                    unoptimized
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </div>
             <figcaption>
               {selectedPhotoNumber} / {galleryPhotos.length}
               <span className="sr-only">좌우로 밀어 사진을 넘길 수 있습니다.</span>

@@ -800,6 +800,21 @@ img {
   user-select: none;
 }
 
+.lightbox-photo-stage {
+  display: grid;
+  width: 100%;
+  place-items: center;
+  overflow: hidden;
+}
+
+.lightbox-photo-frame {
+  display: grid;
+  width: 100%;
+  place-items: center;
+  grid-area: 1 / 1;
+  will-change: opacity, transform;
+}
+
 .lightbox-figure figcaption {
   max-width: min(100%, 520px);
   color: rgba(245, 245, 243, 0.82);

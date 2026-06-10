@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: "오현과 혜선의 결혼식에 초대합니다",
   description:
     "2026년 9월 5일 토요일 오후 5시, 하우스오브더라움 벨루스홀에서 뵙겠습니다.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+  },
   openGraph: {
     title: "오현과 혜선의 결혼식에 초대합니다",
     description:

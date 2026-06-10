@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="오현과 혜선 모바일 청첩장">
+  <rect width="64" height="64" rx="18" fill="#fffaf3" />
+  <circle cx="32" cy="32" r="25" fill="#684a42" />
+  <circle cx="32" cy="17" r="7" fill="#f7f3ec" />
+  <circle cx="45" cy="24.5" r="7" fill="#f7f3ec" />
+  <circle cx="45" cy="39.5" r="7" fill="#f7f3ec" />
+  <circle cx="32" cy="47" r="7" fill="#f7f3ec" />
+  <circle cx="19" cy="39.5" r="7" fill="#f7f3ec" />
+  <circle cx="19" cy="24.5" r="7" fill="#f7f3ec" />
+  <circle cx="32" cy="32" r="7.5" fill="#c98f83" />
+  <circle cx="32" cy="32" r="3.3" fill="#fffaf3" />
+</svg>
