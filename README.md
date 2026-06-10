@@ -18,9 +18,11 @@ Vercel에서 이 폴더를 프로젝트로 연결하면 됩니다.
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://배포주소.vercel.app
+NEXT_PUBLIC_NAVER_MAPS_NCP_KEY_ID=네이버_지도_API_Key_ID
 ```
 
 이 값은 카카오톡/문자 공유 미리보기의 OG 이미지 기준 주소로 사용됩니다.
+네이버 지도는 `NEXT_PUBLIC_NAVER_MAPS_NCP_KEY_ID`가 있을 때 오시는 길 섹션에 표시됩니다. 네이버 클라우드 플랫폼에서 Maps JavaScript API를 활성화하고, 배포 도메인과 로컬 확인 도메인을 Web 서비스 URL로 등록해 주세요. Client Secret은 프론트엔드에 넣지 않습니다.
 
 ## 수정 위치
 

@@ -3,60 +3,69 @@
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState } from "react";
-import { useSwipeable } from "react-swipeable";
+import { useCallback, useEffect, useState } from "react";
 import { galleryPhotos } from "@/data/gallery";
 
 const lightboxPhotoVariants = {
   enter: (direction: number) => ({
-    opacity: 0,
-    scale: 0.985,
-    x: direction > 0 ? 42 : -42,
+    opacity: 0.72,
+    x: direction > 0 ? "100%" : "-100%",
   }),
   center: {
     opacity: 1,
-    scale: 1,
-    x: 0,
+    x: "0%",
   },
   exit: (direction: number) => ({
-    opacity: 0,
-    scale: 0.985,
-    x: direction > 0 ? -42 : 42,
+    opacity: 0.72,
+    x: direction > 0 ? "-100%" : "100%",
   }),
 };
+
+const lightboxPhotoTransition = {
+  x: {
+    type: "spring" as const,
+    stiffness: 245,
+    damping: 31,
+    mass: 0.9,
+  },
+  opacity: {
+    duration: 0.24,
+    ease: "easeOut" as const,
+  },
+};
+
+const swipeConfidenceThreshold = 7800;
+const getSwipePower = (offset: number, velocity: number) => Math.abs(offset) * velocity;
 
 export default function GallerySection() {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const [slideDirection, setSlideDirection] = useState<1 | -1>(1);
 
+  const paginatePhoto = useCallback((direction: 1 | -1) => {
+    setSlideDirection(direction);
+    setSelectedPhotoIndex((currentIndex) => {
+      if (currentIndex === null) {
+        return currentIndex;
+      }
+
+      return (currentIndex + direction + galleryPhotos.length) % galleryPhotos.length;
+    });
+  }, []);
+
   /** 사진 상세 닫기 처리 */
-  const handleCloseClick = () => {
+  const handleCloseClick = useCallback(() => {
     setSelectedPhotoIndex(null);
-  };
+  }, []);
 
   /** 이전 사진 이동 처리 */
-  const handlePreviousClick = () => {
-    setSlideDirection(-1);
-    setSelectedPhotoIndex((currentIndex) => {
-      if (currentIndex === null) {
-        return currentIndex;
-      }
-
-      return (currentIndex - 1 + galleryPhotos.length) % galleryPhotos.length;
-    });
-  };
+  const handlePreviousClick = useCallback(() => {
+    paginatePhoto(-1);
+  }, [paginatePhoto]);
 
   /** 다음 사진 이동 처리 */
-  const handleNextClick = () => {
-    setSlideDirection(1);
-    setSelectedPhotoIndex((currentIndex) => {
-      if (currentIndex === null) {
-        return currentIndex;
-      }
-
-      return (currentIndex + 1) % galleryPhotos.length;
-    });
-  };
+  const handleNextClick = useCallback(() => {
+    paginatePhoto(1);
+  }, [paginatePhoto]);
 
   useEffect(() => {
     if (selectedPhotoIndex === null) {
@@ -85,18 +94,11 @@ export default function GallerySection() {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [selectedPhotoIndex]);
+  }, [handleCloseClick, handleNextClick, handlePreviousClick, selectedPhotoIndex]);
 
   const selectedPhoto =
     selectedPhotoIndex === null ? null : galleryPhotos[selectedPhotoIndex] ?? null;
   const selectedPhotoNumber = selectedPhotoIndex === null ? 0 : selectedPhotoIndex + 1;
-  const swipeHandlers = useSwipeable({
-    delta: 36,
-    preventScrollOnSwipe: true,
-    trackMouse: true,
-    onSwipedLeft: handleNextClick,
-    onSwipedRight: handlePreviousClick,
-  });
 
   return (
     <section className="gallery-section section-pad" id="gallery">
@@ -144,7 +146,7 @@ export default function GallerySection() {
             <ChevronLeft className="action-icon" size={24} aria-hidden="true" />
             <span className="sr-only">이전 사진</span>
           </button>
-          <figure className="lightbox-figure" {...swipeHandlers}>
+          <figure className="lightbox-figure">
             <div className="lightbox-photo-stage" aria-live="polite">
               <AnimatePresence custom={slideDirection} initial={false}>
                 <motion.div
@@ -155,11 +157,18 @@ export default function GallerySection() {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{
-                    type: "spring",
-                    stiffness: 360,
-                    damping: 34,
-                    mass: 0.72,
+                  transition={lightboxPhotoTransition}
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.18}
+                  onDragEnd={(_, { offset, velocity }) => {
+                    const swipePower = getSwipePower(offset.x, velocity.x);
+
+                    if (swipePower < -swipeConfidenceThreshold) {
+                      handleNextClick();
+                    } else if (swipePower > swipeConfidenceThreshold) {
+                      handlePreviousClick();
+                    }
                   }}
                 >
                   <Image
@@ -169,6 +178,7 @@ export default function GallerySection() {
                     height={selectedPhoto.height}
                     className="lightbox-image"
                     sizes="100vw"
+                    priority
                     unoptimized
                   />
                 </motion.div>

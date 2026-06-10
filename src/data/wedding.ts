@@ -32,6 +32,10 @@ export const wedding = {
     station: "건대입구역",
     address: "서울 광진구 능동로 81",
     note: "건대입구역 5번 출구 도보 2분",
+    coordinates: {
+      lat: 37.5383624,
+      lng: 127.0693132,
+    },
   },
 } as const;
 
