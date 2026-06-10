@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans_KR, Noto_Serif_KR } from "next/font/google";
+import "ol/ol.css";
 import "./globals.css";
 
 const notoSansKr = Noto_Sans_KR({

@@ -1,6 +1,6 @@
 import { MapPin, Navigation } from "lucide-react";
 import CopyButton from "@/components/CopyButton";
-import NaverVenueMap from "@/components/NaverVenueMap";
+import VenueMap from "@/components/VenueMap";
 import { mapLinks, wedding } from "@/data/wedding";
 
 export default function VenueSection() {
@@ -17,19 +17,7 @@ export default function VenueSection() {
         </p>
       </div>
 
-      <div className="location-card">
-        {/* 위치 요약 */}
-        <MapPin className="location-mark" size={22} aria-hidden="true" />
-        <div>
-          <span>{wedding.venue.station}</span>
-          <strong>{wedding.venue.name}</strong>
-          <p>
-            {wedding.venue.hall} · {wedding.venue.floorDetail}
-          </p>
-        </div>
-      </div>
-
-      <NaverVenueMap />
+      <VenueMap />
 
       {/* 지도 앱 연결 */}
       <div className="map-actions">

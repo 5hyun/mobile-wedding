@@ -1,5 +1,6 @@
 @import "tailwindcss";
-@source inline("naver-map-card naver-map-canvas naver-map-loading naver-map-fallback naver-map-info");
+@source "../components";
+@source inline("venue-map-card venue-map-canvas venue-map-marker venue-map-error");
 
 :root {
   --bg: #f3f0e8;
@@ -517,73 +518,46 @@ img {
   aspect-ratio: 4 / 5;
 }
 
-.location-card {
-  display: grid;
-  grid-template-columns: 30px 1fr;
-  gap: 14px;
-  align-items: start;
-  margin-top: 42px;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: rgba(255, 253, 248, 0.62);
-}
-
-.location-card > div {
-  min-width: 0;
-}
-
-.location-mark {
-  color: var(--accent);
-  stroke-width: 1.55;
-}
-
-.location-card span {
-  display: block;
-  color: var(--soft);
-  font-size: 0.78rem;
-  line-height: 1.5;
-}
-
-.location-card strong {
-  display: block;
-  margin-top: 4px;
-  font-family: var(--font-serif-kr), serif;
-  font-size: 1.12rem;
-  font-weight: 400;
-  line-height: 1.55;
-  overflow-wrap: anywhere;
-}
-
-.location-card p {
-  margin: 6px 0 0;
-  color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.7;
-  overflow-wrap: anywhere;
-}
-
 .map-actions {
   margin-top: 18px;
 }
 
-.naver-map-card {
+.venue-map-card {
   position: relative;
   min-height: clamp(220px, 52vw, 284px);
-  margin-top: 14px;
+  margin-top: 38px;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface-soft);
 }
 
-.naver-map-canvas {
+.venue-map-canvas {
   width: 100%;
   height: clamp(220px, 52vw, 284px);
 }
 
-.naver-map-loading,
-.naver-map-fallback {
+.venue-map-marker {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 3px solid var(--surface);
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--surface);
+  box-shadow:
+    0 10px 24px rgba(37, 40, 37, 0.22),
+    0 0 0 8px rgba(181, 138, 118, 0.16);
+}
+
+.venue-map-marker svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2;
+}
+
+.venue-map-error {
   position: absolute;
   inset: 0;
   display: grid;
@@ -598,71 +572,30 @@ img {
   text-align: center;
 }
 
-.naver-map-fallback {
-  align-content: center;
-  gap: 8px;
-}
-
-.naver-map-fallback strong {
-  color: var(--ink);
-  font-family: var(--font-serif-kr), serif;
-  font-size: 1.08rem;
-  font-weight: 500;
-  line-height: 1.45;
-}
-
-.naver-map-fallback span {
-  max-width: 260px;
+.venue-map-card .ol-attribution {
+  right: 8px;
+  bottom: 8px;
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.88);
   color: var(--muted);
-  font-size: 0.84rem;
+  font-size: 0.68rem;
+  line-height: 1.3;
+  backdrop-filter: blur(10px);
 }
 
-.naver-map-fallback a {
-  display: inline-flex;
-  min-height: 38px;
-  align-items: center;
-  gap: 7px;
-  margin-top: 4px;
-  padding: 0 12px;
-  border: 1px solid rgba(67, 81, 62, 0.16);
-  border-radius: var(--radius);
-  background: rgba(255, 253, 248, 0.82);
+.venue-map-card .ol-attribution button {
+  width: 22px;
+  height: 22px;
   color: var(--accent-deep);
-  font-size: 0.82rem;
-  font-weight: 500;
-  line-height: 1.35;
-  text-decoration: none;
 }
 
-.naver-map-info {
-  display: grid;
-  gap: 2px;
-  min-width: 136px;
-  padding: 10px 12px;
-  border: 1px solid rgba(37, 40, 37, 0.12);
-  border-radius: var(--radius);
-  background: rgba(255, 253, 248, 0.96);
-  box-shadow: 0 10px 24px rgba(37, 40, 37, 0.12);
-  color: var(--ink);
-  font-family: var(--font-sans-kr), "Apple SD Gothic Neo", sans-serif;
-  text-align: center;
+.venue-map-card .ol-attribution ul {
+  padding: 2px 7px;
 }
 
-.naver-map-info strong,
-.naver-map-info span {
-  display: block;
-}
-
-.naver-map-info strong {
-  font-size: 0.86rem;
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.naver-map-info span {
-  color: var(--muted);
-  font-size: 0.74rem;
-  line-height: 1.45;
+.venue-map-card .ol-control {
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.86);
 }
 
 .account-list {
