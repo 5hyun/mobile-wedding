@@ -8,7 +8,7 @@ Next.js 16, TypeScript, pnpm 기반 모바일 청첩장 프로젝트입니다.
 pnpm dev
 ```
 
-현재 로컬 확인 주소는 `http://localhost:3001`입니다.
+현재 로컬 확인 주소는 `http://localhost:3000`입니다.
 
 ## 배포
 
@@ -21,7 +21,7 @@ NEXT_PUBLIC_SITE_URL=https://배포주소.vercel.app
 ```
 
 이 값은 카카오톡/문자 공유 미리보기의 OG 이미지 기준 주소로 사용됩니다.
-오시는 길 지도는 OpenLayers와 OpenStreetMap 타일을 사용하며 별도 지도 API 키가 필요하지 않습니다.
+오시는 길 지도는 OpenLayers와 CARTO Voyager 타일을 사용하며 별도 지도 API 키가 필요하지 않습니다. 지도 attribution은 OpenStreetMap과 CARTO 표기를 유지합니다.
 
 ## 수정 위치
 

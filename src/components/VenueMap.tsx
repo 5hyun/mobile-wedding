@@ -8,7 +8,7 @@ import View from "ol/View.js";
 import { defaults as defaultControls } from "ol/control/defaults.js";
 import TileLayer from "ol/layer/Tile.js";
 import { fromLonLat } from "ol/proj.js";
-import OSM from "ol/source/OSM.js";
+import XYZ from "ol/source/XYZ.js";
 import { wedding } from "@/data/wedding";
 
 const venueCoordinate = fromLonLat([
@@ -26,8 +26,16 @@ export default function VenueMap() {
       return;
     }
 
+    const tileSource = new XYZ({
+      attributions:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      crossOrigin: "anonymous",
+      maxZoom: 20,
+      transition: 180,
+      url: "https://{a-d}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
+    });
     const tileLayer = new TileLayer({
-      source: new OSM(),
+      source: tileSource,
     });
     const marker = new Overlay({
       element: markerRef.current,
@@ -47,9 +55,9 @@ export default function VenueMap() {
       target: mapRef.current,
       view: new View({
         center: venueCoordinate,
-        maxZoom: 18,
+        maxZoom: 19,
         minZoom: 14,
-        zoom: 16,
+        zoom: 17,
       }),
     });
     marker.setPosition(venueCoordinate);
@@ -57,8 +65,6 @@ export default function VenueMap() {
     const handleTileLoadError = () => {
       setHasMapError(true);
     };
-    const tileSource = tileLayer.getSource();
-
     tileSource?.on("tileloaderror", handleTileLoadError);
 
     return () => {

@@ -1,8 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="오현과 혜선 모바일 청첩장">
-  <rect width="64" height="64" rx="14" fill="#f3f0e8" />
-  <circle cx="32" cy="32" r="22" fill="#43513e" />
+  <rect width="64" height="64" rx="14" fill="#f4f1ea" />
+  <circle cx="32" cy="32" r="22" fill="#344735" />
   <path d="M30.9 20.2C22 21.2 16.6 27.6 19.3 36.2C25.4 35.5 31 30.7 30.9 20.2Z" fill="#fffdf8" />
   <path d="M33.1 20.2C42 21.2 47.4 27.6 44.7 36.2C38.6 35.5 33 30.7 33.1 20.2Z" fill="#fffdf8" />
-  <path d="M22.5 40.8C26.8 48.1 37.2 48.1 41.5 40.8C37.2 38.5 26.8 38.5 22.5 40.8Z" fill="#e8ece2" />
-  <circle cx="32" cy="35.2" r="4.8" fill="#b58a76" />
+  <path d="M22.5 40.8C26.8 48.1 37.2 48.1 41.5 40.8C37.2 38.5 26.8 38.5 22.5 40.8Z" fill="#e9eee4" />
+  <circle cx="32" cy="35.2" r="4.8" fill="#c67f82" />
+  <circle cx="32" cy="35.2" r="6.2" fill="none" stroke="#b79a64" stroke-width="1.2" opacity="0.72" />
 </svg>

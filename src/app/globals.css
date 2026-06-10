@@ -3,18 +3,25 @@
 @source inline("venue-map-card venue-map-canvas venue-map-marker venue-map-error");
 
 :root {
-  --bg: #f3f0e8;
+  --bg: #f4f1ea;
   --surface: #fffdf8;
-  --surface-soft: #e8ece2;
-  --ink: #252825;
-  --muted: #6f7169;
-  --soft: #9b9b8d;
-  --line: rgba(37, 40, 37, 0.1);
-  --line-strong: rgba(37, 40, 37, 0.18);
-  --accent: #b58a76;
-  --accent-deep: #43513e;
-  --accent-soft: #eaded6;
-  --green: #6f7f68;
+  --surface-warm: #fbf4ee;
+  --surface-green: #e9eee4;
+  --surface-soft: #edf2ea;
+  --ink: #252823;
+  --muted: #6d7068;
+  --soft: #9b988d;
+  --line: rgba(37, 40, 35, 0.1);
+  --line-strong: rgba(37, 40, 35, 0.18);
+  --accent: #c67f82;
+  --accent-deep: #344735;
+  --accent-wine: #7f3f4d;
+  --accent-gold: #b79a64;
+  --accent-soft: #f0dadd;
+  --green: #7d8f72;
+  --shadow-soft: 0 18px 44px rgba(44, 49, 39, 0.1);
+  --shadow-float: 0 14px 30px rgba(44, 49, 39, 0.14);
+  --shadow-rose: 0 12px 28px rgba(198, 127, 130, 0.2);
   --radius: 8px;
   --page-width: 520px;
 }
@@ -58,9 +65,7 @@ img {
   min-height: 100svh;
   padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   background:
-    linear-gradient(90deg, rgba(37, 40, 37, 0.035) 1px, transparent 1px) center / 28px 28px,
-    radial-gradient(circle at 50% 0%, rgba(111, 127, 104, 0.13), transparent 36%),
-    var(--bg);
+    linear-gradient(180deg, #f7f3ed 0%, #f0eee6 48%, #f5f1eb 100%);
 }
 
 .invitation-page {
@@ -68,27 +73,18 @@ img {
   min-height: 100svh;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(255, 253, 248, 0.48), transparent 360px),
-    var(--bg);
+    linear-gradient(180deg, #fffdf8 0%, #f4f7f1 48%, #fffdf8 100%);
 }
 
 .section-pad {
   position: relative;
-  padding: 86px 28px 96px;
+  padding: 90px 28px 100px;
   border-top: 1px solid var(--line);
 }
 
 .section-pad::before {
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  width: 42px;
-  height: 9px;
-  border: 1px solid rgba(111, 127, 104, 0.24);
-  border-radius: 999px;
-  background: var(--bg);
-  content: "";
-  transform: translateX(-50%);
+  display: none;
+  content: none;
 }
 
 .section-copy {
@@ -106,7 +102,7 @@ img {
   margin: 0;
   color: var(--accent);
   font-family: var(--font-serif-kr), serif;
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 500;
   line-height: 1.45;
   letter-spacing: 0;
@@ -116,9 +112,9 @@ img {
 .section-copy h2 {
   margin: 0;
   font-family: var(--font-serif-kr), serif;
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.54;
+  font-size: 1.56rem;
+  font-weight: 400;
+  line-height: 1.48;
   text-wrap: balance;
 }
 
@@ -127,7 +123,7 @@ img {
   color: var(--muted);
   font-size: 0.96rem;
   font-weight: 400;
-  line-height: 1.9;
+  line-height: 1.92;
   text-wrap: pretty;
 }
 
@@ -159,9 +155,9 @@ img {
   padding: 0 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(255, 253, 248, 0.48);
+  background: rgba(255, 253, 248, 0.74);
   color: var(--ink);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 500;
   line-height: 1.35;
   text-align: center;
@@ -199,20 +195,20 @@ img {
 .lightbox-close:focus-visible,
 .lightbox-nav:focus-visible,
 .scroll-top-button:focus-visible {
-  outline: 2px solid rgba(111, 127, 104, 0.42);
+  outline: 2px solid rgba(183, 154, 100, 0.46);
   outline-offset: 3px;
 }
 
 .primary-action,
 .primary-button {
-  border-color: rgba(67, 81, 62, 0.18);
-  background: var(--accent-deep);
+  border-color: rgba(52, 71, 53, 0.18);
+  background: linear-gradient(180deg, #3f553f 0%, var(--accent-deep) 100%);
   color: var(--surface);
-  box-shadow: 0 12px 26px rgba(67, 81, 62, 0.15);
+  box-shadow: 0 14px 30px rgba(52, 71, 53, 0.22);
 }
 
 .hero-section {
-  background: var(--bg);
+  background: var(--surface);
 }
 
 .hero-image-wrap {
@@ -221,8 +217,8 @@ img {
   height: clamp(340px, 50svh, 500px);
   margin: 0;
   overflow: hidden;
-  border-bottom: 1px solid var(--line);
-  background: var(--accent-soft);
+  border-bottom: 1px solid rgba(183, 154, 100, 0.14);
+  background: var(--surface-green);
 }
 
 .hero-image {
@@ -236,6 +232,9 @@ img {
   display: grid;
   justify-items: center;
   padding: 36px 28px 92px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.82), rgba(251, 244, 238, 0.46)),
+    var(--surface);
   text-align: center;
 }
 
@@ -250,7 +249,7 @@ img {
   display: block;
   width: 56px;
   height: 1px;
-  background: var(--line-strong);
+  background: linear-gradient(90deg, transparent, rgba(183, 154, 100, 0.72), transparent);
   content: "";
 }
 
@@ -273,7 +272,7 @@ img {
 
 .hero-date {
   margin: 0;
-  color: var(--accent);
+  color: var(--accent-wine);
   font-family: var(--font-serif-kr), serif;
   font-size: 0.82rem;
   font-weight: 500;
@@ -348,9 +347,23 @@ img {
   background: var(--surface);
 }
 
+.invitation-section,
+.gallery-section {
+  background:
+    linear-gradient(180deg, rgba(233, 238, 228, 0.56), rgba(255, 253, 248, 0.62)),
+    var(--surface-green);
+}
+
+.venue-section,
+.contact-section {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.86), rgba(251, 244, 238, 0.46)),
+    var(--surface);
+}
+
 .story-gallery {
   display: grid;
-  gap: 8px;
+  gap: 12px;
   margin-top: 52px;
 }
 
@@ -358,7 +371,10 @@ img {
   margin: 0;
   overflow: hidden;
   border-radius: var(--radius);
-  background: var(--accent-soft);
+  background: var(--surface-green);
+  box-shadow:
+    var(--shadow-soft),
+    0 1px 0 rgba(255, 255, 255, 0.76) inset;
 }
 
 .story-frame img {
@@ -374,7 +390,7 @@ img {
 .story-pair {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  gap: 12px;
 }
 
 .story-pair .story-frame {
@@ -483,7 +499,7 @@ img {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-flow: dense;
-  gap: 8px;
+  gap: 10px;
   margin-top: 44px;
 }
 
@@ -495,7 +511,10 @@ img {
   overflow: hidden;
   border: 0;
   border-radius: var(--radius);
-  background: var(--accent-soft);
+  background: var(--surface-green);
+  box-shadow:
+    0 14px 34px rgba(44, 49, 39, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.76) inset;
 }
 
 .gallery-item img {
@@ -524,31 +543,36 @@ img {
 
 .venue-map-card {
   position: relative;
-  min-height: clamp(220px, 52vw, 284px);
+  min-height: clamp(236px, 54vw, 304px);
   margin-top: 38px;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(52, 71, 53, 0.14);
   border-radius: var(--radius);
-  background: var(--surface-soft);
+  background: #fbf8f2;
+  box-shadow: 0 18px 44px rgba(44, 49, 39, 0.12);
 }
 
 .venue-map-canvas {
   width: 100%;
-  height: clamp(220px, 52vw, 284px);
+  height: clamp(236px, 54vw, 304px);
+}
+
+.venue-map-card .ol-layer canvas {
+  filter: saturate(0.7) contrast(0.94) brightness(1.04) sepia(0.05);
 }
 
 .venue-map-marker {
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   place-items: center;
   border: 3px solid var(--surface);
   border-radius: 999px;
-  background: var(--accent);
+  background: linear-gradient(180deg, #cf8a8d 0%, #b96d73 100%);
   color: var(--surface);
   box-shadow:
-    0 10px 24px rgba(37, 40, 37, 0.22),
-    0 0 0 8px rgba(181, 138, 118, 0.16);
+    0 12px 28px rgba(127, 63, 77, 0.24),
+    0 0 0 9px rgba(198, 127, 130, 0.16);
 }
 
 .venue-map-marker svg {
@@ -564,8 +588,8 @@ img {
   place-items: center;
   padding: 22px;
   background:
-    linear-gradient(135deg, rgba(255, 253, 248, 0.76), rgba(232, 236, 226, 0.8)),
-    var(--surface-soft);
+    linear-gradient(180deg, rgba(255, 253, 248, 0.9), rgba(233, 238, 228, 0.74)),
+    var(--surface-green);
   color: var(--muted);
   font-size: 0.88rem;
   line-height: 1.65;
@@ -575,12 +599,14 @@ img {
 .venue-map-card .ol-attribution {
   right: 8px;
   bottom: 8px;
+  max-width: calc(100% - 16px);
+  border: 1px solid rgba(52, 71, 53, 0.1);
   border-radius: 999px;
   background: rgba(255, 253, 248, 0.88);
   color: var(--muted);
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   line-height: 1.3;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
 }
 
 .venue-map-card .ol-attribution button {
@@ -594,6 +620,7 @@ img {
 }
 
 .venue-map-card .ol-control {
+  border: 1px solid rgba(52, 71, 53, 0.1);
   border-radius: 999px;
   background: rgba(255, 253, 248, 0.86);
 }
@@ -606,11 +633,13 @@ img {
 
 .account-group {
   display: grid;
-  gap: 12px;
-  padding: 18px;
+  gap: 14px;
+  padding: 20px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(255, 253, 248, 0.6);
+  background: rgba(255, 253, 248, 0.74);
+  box-shadow: 0 14px 34px rgba(44, 49, 39, 0.08);
+  backdrop-filter: blur(10px);
 }
 
 .account-group h3 {
@@ -685,7 +714,9 @@ img {
   padding: 15px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(255, 253, 248, 0.54);
+  background: rgba(255, 253, 248, 0.74);
+  box-shadow: 0 12px 28px rgba(44, 49, 39, 0.07);
+  backdrop-filter: blur(10px);
 }
 
 .contact-card span {
@@ -721,7 +752,7 @@ img {
   gap: 7px;
   width: 100%;
   margin: 18px 0 0;
-  color: var(--accent);
+  color: var(--accent-wine);
   font-size: 0.84rem;
   line-height: 1.6;
   text-align: center;
@@ -738,6 +769,7 @@ img {
 
 .closing-section {
   border-top: 1px solid var(--line);
+  background: var(--surface);
 }
 
 .closing-section img {
@@ -749,6 +781,9 @@ img {
 
 .closing-copy {
   padding: 42px 28px 112px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.96), rgba(233, 238, 228, 0.58)),
+    var(--surface);
   color: var(--ink);
   text-align: center;
 }
@@ -796,15 +831,15 @@ img {
   align-items: center;
   gap: 7px;
   padding: 0 13px;
-  border: 1px solid rgba(67, 81, 62, 0.16);
+  border: 1px solid rgba(52, 71, 53, 0.16);
   border-radius: 999px;
-  background: rgba(255, 253, 248, 0.88);
+  background: rgba(255, 253, 248, 0.9);
   color: var(--accent-deep);
   font-size: 0.82rem;
   font-weight: 500;
   line-height: 1.35;
   text-decoration: none;
-  box-shadow: 0 12px 26px rgba(37, 40, 37, 0.13);
+  box-shadow: var(--shadow-float);
   opacity: 0;
   pointer-events: none;
   transform: translateY(8px);
@@ -927,8 +962,8 @@ img {
 
   .primary-action:hover,
   .primary-button:hover {
-    border-color: rgba(67, 81, 62, 0.24);
-    background: #53624c;
+    border-color: rgba(52, 71, 53, 0.28);
+    background: linear-gradient(180deg, #465e45 0%, #344735 100%);
     color: var(--surface);
   }
 
