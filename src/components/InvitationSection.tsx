@@ -75,14 +75,17 @@ export default function InvitationSection() {
 
         <div className="invitation-family" aria-label="혼주 및 신랑 신부">
           <p>
-            <span>
+            <span className="family-parent-line">
               {wedding.groom.father} ·{" "}
-              <span className="paper-memorial-name">故 {wedding.groom.mother}</span>의 장남
+              <span className="paper-memorial-prefix" aria-label="고인 표시">
+                故
+              </span>{" "}
+              {wedding.groom.mother}의 장남
             </span>
             <strong>{wedding.groom.name}</strong>
           </p>
           <p>
-            <span>
+            <span className="family-parent-line">
               {wedding.bride.father} · {wedding.bride.mother}의 차녀
             </span>
             <strong>{wedding.bride.name}</strong>

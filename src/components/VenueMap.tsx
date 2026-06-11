@@ -174,6 +174,12 @@ export default function VenueMap() {
   return (
     <div className="venue-map-card" aria-label={`${wedding.venue.name} 위치 지도`}>
       <div ref={mapRef} className="venue-map-canvas" />
+      <div className="venue-map-guide" aria-hidden="true">
+        <span>{wedding.venue.station}</span>
+        <strong>{wedding.venue.exit}</strong>
+        <span>{wedding.venue.name}</span>
+        <em>{wedding.venue.walk}</em>
+      </div>
       <div ref={markerRef} className="venue-map-marker" aria-hidden="true">
         <MapPin size={26} />
       </div>

@@ -66,18 +66,7 @@ export default function WeddingInfoSection() {
 
         <div className="paper-location-summary">
           <h2>LOCATION</h2>
-          <div className="paper-map-thumb" aria-hidden="true">
-            <span className="paper-road road-a" />
-            <span className="paper-road road-b" />
-            <span className="paper-road road-c" />
-            <span className="paper-road road-d" />
-            <span className="paper-map-dot station-dot" />
-            <span className="paper-map-dot venue-dot" />
-            <span className="paper-map-label station-label">{wedding.venue.station}</span>
-            <span className="paper-map-label venue-label">{wedding.venue.name}</span>
-            <span className="paper-map-label exit-label">{wedding.venue.exit}</span>
-          </div>
-          <p>
+          <p className="paper-location-line">
             {wedding.venue.name} / {wedding.venue.hall}
             <br />
             {wedding.venue.subwayLine} {wedding.venue.station} {wedding.venue.exit}

@@ -438,6 +438,10 @@ img {
   color: var(--paper-ink);
 }
 
+.family-parent-line {
+  white-space: nowrap;
+}
+
 .invitation-family strong {
   color: var(--paper-ink);
   font-size: 1rem;
@@ -445,26 +449,13 @@ img {
   white-space: nowrap;
 }
 
-.paper-memorial-name {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-}
-
-.paper-memorial-name::before {
+.paper-memorial-prefix {
   display: inline-block;
-  width: 0.26em;
-  height: 0.26em;
-  border-radius: 999px;
-  background: var(--accent);
-  box-shadow:
-    0 -0.25em 0 -0.02em var(--accent),
-    0.25em 0 0 -0.02em var(--accent),
-    0 0.25em 0 -0.02em var(--accent),
-    -0.25em 0 0 -0.02em var(--accent);
-  content: "";
-  opacity: 0.82;
-  transform: translateY(-0.04em);
+  color: var(--accent-deep) !important;
+  font-family: var(--font-paper);
+  font-size: 0.78em;
+  font-weight: 700;
+  transform: translateY(-0.08em);
 }
 
 .signature-line {
@@ -485,6 +476,11 @@ img {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 18px;
   align-items: end;
+}
+
+.paper-location-summary {
+  display: grid;
+  align-content: center;
 }
 
 .paper-calendar h2,
@@ -563,97 +559,10 @@ img {
   gap: 2px;
 }
 
-.paper-map-thumb {
-  position: relative;
-  min-height: 118px;
-  overflow: hidden;
-  border: 1px solid #e6e4de;
-  background: #eeeeea;
-}
-
-.paper-road {
-  position: absolute;
-  display: block;
-  border-radius: 999px;
-  background: #fff;
-}
-
-.road-a {
-  top: -12px;
-  left: 44%;
-  width: 18px;
-  height: 170px;
-  transform: rotate(13deg);
-}
-
-.road-b {
-  top: 26px;
-  left: -18px;
-  width: 190px;
-  height: 18px;
-  transform: rotate(17deg);
-}
-
-.road-c {
-  right: -24px;
-  bottom: 28px;
-  width: 190px;
-  height: 18px;
-  transform: rotate(-18deg);
-}
-
-.road-d {
-  top: 0;
-  right: 24%;
-  width: 14px;
-  height: 150px;
-  transform: rotate(-6deg);
-}
-
-.paper-map-dot {
-  position: absolute;
-  display: block;
-  width: 10px;
-  height: 10px;
-  border: 2px solid var(--paper);
-  border-radius: 999px;
-  background: var(--soft);
-}
-
-.station-dot {
-  top: 24px;
-  left: 42%;
-}
-
-.venue-dot {
-  right: 24%;
-  bottom: 30px;
-  background: var(--accent);
-}
-
-.paper-map-label {
-  position: absolute;
-  color: var(--muted);
-  font-size: 0.54rem;
-  font-weight: 600;
-  line-height: 1.25;
-  white-space: nowrap;
-}
-
-.station-label {
-  top: 16px;
-  left: 51%;
-}
-
-.venue-label {
-  right: 6%;
-  bottom: 45px;
-}
-
-.exit-label {
-  top: 48px;
-  left: 34%;
-  color: var(--accent-deep);
+.paper-location-line {
+  padding: 18px 0;
+  border-top: 1px dashed var(--line-strong);
+  border-bottom: 1px dashed var(--line-strong);
 }
 
 .button-row,
@@ -770,6 +679,36 @@ img {
   border: 1px dashed var(--line-strong);
   border-radius: var(--radius);
   background: var(--paper-soft);
+}
+
+.venue-map-guide {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 4;
+  display: flex;
+  max-width: calc(100% - 20px);
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 9px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  background: rgba(251, 250, 247, 0.92);
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.25;
+  pointer-events: none;
+}
+
+.venue-map-guide strong {
+  color: var(--paper-ink);
+}
+
+.venue-map-guide em {
+  color: var(--accent-deep);
+  font-style: normal;
 }
 
 .venue-map-canvas {
