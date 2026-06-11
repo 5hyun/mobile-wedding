@@ -385,7 +385,7 @@ img {
   line-height: 1.35 !important;
 }
 
-.invitation-panel-copy > p:not(.signature-line) {
+.invitation-panel-copy > p {
   font-size: 0.86rem;
   line-height: 1.78;
 }
@@ -447,19 +447,6 @@ img {
   width: 100%;
   height: 100%;
   fill: currentColor;
-}
-
-.signature-line {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
-  margin: 10px 0 0 !important;
-  color: var(--paper-ink) !important;
-  font-family: var(--font-serif-kr), serif;
-  font-size: 1.42rem !important;
-  font-weight: 500 !important;
-  line-height: 1.4 !important;
 }
 
 .paper-info-grid {
@@ -528,18 +515,17 @@ img {
 }
 
 .paper-calendar p {
-  margin: 14px 0 0;
+  margin: 10px 0 0;
   color: var(--paper-ink);
   font-size: 0.84rem;
   font-weight: 700;
-  line-height: 1.55;
+  line-height: 1.45;
   text-align: center;
   word-break: keep-all;
 }
 
 .paper-date-line {
-  display: grid;
-  gap: 2px;
+  white-space: nowrap;
 }
 
 .button-row,

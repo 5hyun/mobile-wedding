@@ -94,11 +94,6 @@ export default function InvitationSection() {
             <strong>{wedding.bride.name}</strong>
           </p>
         </div>
-
-        <p className="signature-line" aria-label={`${wedding.groom.name} ${wedding.bride.name}`}>
-          <span>{wedding.groom.name}</span>
-          <span>{wedding.bride.name}</span>
-        </p>
       </div>
     </section>
   );
