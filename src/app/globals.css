@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @source "../components";
-@source inline("venue-map-card venue-map-paper venue-paper-road venue-paper-dot venue-paper-label venue-paper-route");
+@source inline("venue-map-card venue-map-image");
 
 :root {
   --bg: #eeeeeb;
@@ -666,164 +666,17 @@ img {
 
 .venue-map-card {
   position: relative;
-  min-height: clamp(278px, 74vw, 390px);
-  margin-top: 26px;
+  margin: 26px 0 0;
   overflow: hidden;
   border: 1px dashed var(--line-strong);
   border-radius: var(--radius);
-  background: var(--paper-soft);
+  background: var(--paper);
 }
 
-.venue-map-paper {
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px) 0 0 / 34px 34px,
-    linear-gradient(rgba(255, 255, 255, 0.42) 1px, transparent 1px) 0 0 / 34px 34px,
-    #eeeeea;
-}
-
-.venue-paper-road {
-  position: absolute;
+.venue-map-image {
   display: block;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 0 0 1px rgba(216, 213, 206, 0.24);
-}
-
-.road-main {
-  top: 32%;
-  left: -12%;
-  width: 128%;
-  height: 28px;
-  transform: rotate(10deg);
-}
-
-.road-left {
-  top: -7%;
-  left: 26%;
-  width: 26px;
-  height: 120%;
-  transform: rotate(15deg);
-}
-
-.road-right {
-  top: -5%;
-  right: 20%;
-  width: 24px;
-  height: 118%;
-  transform: rotate(-5deg);
-}
-
-.road-bottom {
-  right: -18%;
-  bottom: 14%;
-  width: 105%;
-  height: 28px;
-  transform: rotate(-21deg);
-}
-
-.road-vertical {
-  right: 33%;
-  bottom: -12%;
-  width: 24px;
-  height: 72%;
-  transform: rotate(5deg);
-}
-
-.venue-paper-path {
-  position: absolute;
-  left: 42%;
-  top: 41%;
-  width: 1px;
-  height: 30%;
-  border-left: 2px dashed rgba(154, 101, 112, 0.62);
-  transform: rotate(15deg);
-}
-
-.venue-paper-dot {
-  position: absolute;
-  z-index: 2;
-  display: block;
-  width: 12px;
-  height: 12px;
-  border: 2px solid var(--paper);
-  border-radius: 999px;
-  background: var(--soft);
-}
-
-.venue-map-paper .station-dot {
-  top: 28%;
-  left: 39%;
-}
-
-.venue-map-paper .venue-dot {
-  right: 23%;
-  bottom: 25%;
-  background: var(--accent);
-}
-
-.venue-paper-label,
-.venue-paper-route {
-  position: absolute;
-  z-index: 3;
-  white-space: nowrap;
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  line-height: 1.25;
-}
-
-.venue-map-paper .station-label {
-  top: 25%;
-  left: 45%;
-}
-
-.venue-map-paper .exit-label {
-  top: 41%;
-  left: 31%;
-  display: inline-flex;
-  gap: 5px;
-  align-items: center;
-  color: var(--paper-ink);
-}
-
-.venue-map-paper .exit-label span {
-  display: grid;
-  width: 20px;
-  height: 20px;
-  place-items: center;
-  border-radius: 999px;
-  background: var(--paper-ink);
-  color: var(--paper);
-  font-family: var(--font-paper);
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-
-.venue-paper-route {
-  left: 25%;
-  bottom: 29%;
-  padding: 6px 8px;
-  border: 1px solid rgba(197, 193, 184, 0.8);
-  background: rgba(251, 250, 247, 0.9);
-  color: var(--accent-deep);
-}
-
-.venue-map-paper .venue-label {
-  right: 9%;
-  bottom: 15%;
-  display: grid;
-  gap: 3px;
-  padding: 8px 10px;
-  border: 1px solid rgba(111, 74, 82, 0.24);
-  background: rgba(111, 74, 82, 0.92);
-  color: var(--paper);
-  text-align: center;
-}
-
-.venue-map-paper .venue-label em {
-  color: rgba(251, 250, 247, 0.74);
-  font-style: normal;
-  font-size: 0.62rem;
+  width: 100%;
+  height: auto;
 }
 
 .account-list {
