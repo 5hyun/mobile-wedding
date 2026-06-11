@@ -89,10 +89,10 @@ export default function VenueMap() {
       }),
       style: new Style({
         stroke: new Stroke({
-          color: "rgba(52, 71, 53, 0.84)",
+          color: "rgba(126, 88, 96, 0.74)",
           lineCap: "round",
-          lineDash: [7, 7],
-          width: 3,
+          lineDash: [8, 8],
+          width: 2.5,
         }),
       }),
     });

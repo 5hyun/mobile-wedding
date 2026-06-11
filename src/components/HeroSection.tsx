@@ -19,6 +19,16 @@ export default function HeroSection() {
           className="hero-image"
           sizes="(max-width: 520px) 100vw, 480px"
         />
+        <span className="hero-name-label hero-name-groom">[ohhyun]</span>
+        <span className="hero-name-label hero-name-bride">[hyesun]</span>
+        <span className="hero-detail-mark" aria-hidden="true">
+          <span className="hero-qr-mark" />
+          <span>
+            Read More
+            <br />
+            Details
+          </span>
+        </span>
       </figure>
 
       {/* 첫 화면 정보 */}
@@ -26,9 +36,9 @@ export default function HeroSection() {
         <div className="hero-title-stack">
           <p className="hero-date">{wedding.date.compact}</p>
           <h1 aria-label={`${wedding.groom.name} 그리고 ${wedding.bride.name}`}>
-            <span>{wedding.groom.name}</span>
+            <span>{wedding.groom.shortName}</span>
             <i aria-hidden="true">and</i>
-            <span>{wedding.bride.name}</span>
+            <span>{wedding.bride.shortName}</span>
           </h1>
           <p className="hero-venue">
             {wedding.venue.name}
@@ -36,7 +46,7 @@ export default function HeroSection() {
             {wedding.venue.hall} · {wedding.venue.floor} · {wedding.venue.station}
           </p>
         </div>
-        <p className="hero-note">결혼식에 초대합니다</p>
+        <p className="hero-note">We are Getting Married</p>
         <div className="hero-actions">
           <a className="text-action primary-action" href="#wedding-info">
             <CalendarDays className="action-icon" size={17} aria-hidden="true" />

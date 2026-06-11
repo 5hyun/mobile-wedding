@@ -1,8 +1,8 @@
 /** 청첩장 핵심 구간에 사용하는 대표 사진 */
 export const photos = [
   {
-    src: "/images/concepts/sheer-veil-kw2-2983.webp",
-    alt: "베일 너머에서 마주보는 권오현 박혜선",
+    src: "/images/concepts/sofa-veil-kw2-1872.webp",
+    alt: "베일 아래에서 웃고 있는 권오현 박혜선",
     width: 1200,
     height: 1800,
     role: "hero",
