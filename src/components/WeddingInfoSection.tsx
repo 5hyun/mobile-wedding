@@ -58,7 +58,10 @@ export default function WeddingInfoSection() {
               </span>
             ))}
           </div>
-          <p>{wedding.date.display} {wedding.date.time}</p>
+          <p className="paper-date-line">
+            <span>2026년 9월 5일 (토)</span>
+            <span>{wedding.date.time}</span>
+          </p>
         </div>
 
         <div className="paper-location-summary">
