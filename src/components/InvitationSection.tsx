@@ -77,9 +77,12 @@ export default function InvitationSection() {
           <p>
             <span className="family-parent-line">
               {wedding.groom.father} ·{" "}
-              <span className="memorial-character-icon" aria-label="고인 표시">
-                故
-              </span>{" "}
+              <span className="memorial-flower-icon" aria-label="고인 표시">
+                <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                  <path d="M8 1.4c.9 1 1.3 2 1.1 3.1 1-.6 2-.7 3.3-.2-.1 1.3-.6 2.2-1.5 2.8 1.1.3 1.8 1.1 2.3 2.3-1 .8-2 1.1-3.1.8.4 1.1.2 2.1-.5 3.2-1.2-.4-2-1.1-2.4-2.2-.6 1-1.5 1.5-2.8 1.7-.6-1.2-.7-2.2-.2-3.2-1.2.1-2.1-.3-3-1.2.6-1.1 1.4-1.8 2.6-1.9-.8-.8-1.2-1.8-1-3.1 1.3-.2 2.3.1 3.1.9C6.1 3.2 6.7 2.2 8 1.4Z" />
+                  <circle cx="8" cy="7.7" r="1.7" />
+                </svg>
+              </span>
               {wedding.groom.mother}의 장남
             </span>
             <strong>{wedding.groom.name}</strong>

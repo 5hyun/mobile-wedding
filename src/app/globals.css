@@ -449,20 +449,20 @@ img {
   white-space: nowrap;
 }
 
-.memorial-character-icon {
+.memorial-flower-icon {
   display: inline-grid;
-  width: 1.32em;
-  height: 1.32em;
+  width: 1.12em;
+  height: 1.12em;
   place-items: center;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  background: var(--paper);
   color: var(--accent-deep) !important;
-  font-family: var(--font-paper);
-  font-size: 0.78em;
-  font-weight: 700;
   line-height: 1;
-  vertical-align: 0.05em;
+  vertical-align: -0.12em;
+}
+
+.memorial-flower-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
 
 .signature-line {
