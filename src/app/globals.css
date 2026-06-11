@@ -9,8 +9,8 @@
   --paper-ink: #171717;
   --muted: #66645f;
   --soft: #8c8981;
-  --line: #d8d5ce;
-  --line-strong: #c5c1b8;
+  --line: #dfdcd4;
+  --line-strong: #cac5ba;
   --accent: #9a6570;
   --accent-deep: #6f4a52;
   --focus: rgba(154, 101, 112, 0.34);
@@ -155,7 +155,7 @@ img {
   justify-content: center;
   gap: 8px;
   padding: 0 13px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid rgba(202, 197, 186, 0.92);
   border-radius: var(--radius);
   background: rgba(251, 250, 247, 0.92);
   color: var(--paper-ink);
@@ -269,9 +269,9 @@ img {
 }
 
 .hero-qr-mark {
-  width: 42px;
-  height: 42px;
-  border: 4px solid #fff;
+  width: 40px;
+  height: 40px;
+  border: 3px solid #fff;
   background:
     linear-gradient(90deg, #111 50%, transparent 0) 0 0 / 8px 8px,
     linear-gradient(#111 50%, transparent 0) 0 0 / 8px 8px,
@@ -612,24 +612,28 @@ img {
 }
 
 .map-actions {
-  margin-top: 18px;
+  margin-top: 16px;
+}
+
+.map-actions .copy-button {
+  grid-column: 1 / -1;
 }
 
 .venue-transit {
   display: grid;
-  grid-template-columns: 34px 1fr;
-  gap: 12px;
+  grid-template-columns: 32px 1fr;
+  gap: 13px;
   align-items: center;
   margin-top: 22px;
-  padding: 13px 0;
+  padding: 14px 0;
   border-top: 1px dashed var(--line-strong);
   border-bottom: 1px dashed var(--line-strong);
 }
 
 .venue-transit-icon {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   place-items: center;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
@@ -666,7 +670,7 @@ img {
 
 .venue-map-card {
   position: relative;
-  margin: 26px 0 0;
+  margin: 24px 0 0;
   overflow: hidden;
   border: 1px dashed var(--line-strong);
   border-radius: var(--radius);
@@ -893,15 +897,16 @@ img {
   z-index: 20;
   appearance: none;
   display: inline-flex;
-  min-height: 40px;
+  min-height: 38px;
   align-items: center;
-  gap: 7px;
-  padding: 0 12px;
-  border: 1px solid var(--line-strong);
+  gap: 6px;
+  padding: 0 10px;
+  border: 1px solid rgba(202, 197, 186, 0.86);
   border-radius: var(--radius);
-  background: rgba(251, 250, 247, 0.94);
+  background: rgba(251, 250, 247, 0.88);
   color: var(--paper-ink);
-  font-size: 0.8rem;
+  box-shadow: 0 8px 22px rgba(23, 23, 23, 0.06);
+  font-size: 0.76rem;
   font-weight: 700;
   line-height: 1.35;
   text-decoration: none;
@@ -913,10 +918,11 @@ img {
     transform 180ms ease,
     border-color 180ms ease,
     background 180ms ease;
+  backdrop-filter: blur(10px);
 }
 
 .scroll-top-button.is-visible {
-  opacity: 1;
+  opacity: 0.94;
   pointer-events: auto;
   transform: translateY(0);
 }
