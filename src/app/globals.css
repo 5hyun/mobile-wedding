@@ -449,13 +449,20 @@ img {
   white-space: nowrap;
 }
 
-.paper-memorial-prefix {
-  display: inline-block;
+.memorial-character-icon {
+  display: inline-grid;
+  width: 1.32em;
+  height: 1.32em;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--paper);
   color: var(--accent-deep) !important;
   font-family: var(--font-paper);
   font-size: 0.78em;
   font-weight: 700;
-  transform: translateY(-0.08em);
+  line-height: 1;
+  vertical-align: 0.05em;
 }
 
 .signature-line {

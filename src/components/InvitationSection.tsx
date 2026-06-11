@@ -77,7 +77,7 @@ export default function InvitationSection() {
           <p>
             <span className="family-parent-line">
               {wedding.groom.father} ·{" "}
-              <span className="paper-memorial-prefix" aria-label="고인 표시">
+              <span className="memorial-character-icon" aria-label="고인 표시">
                 故
               </span>{" "}
               {wedding.groom.mother}의 장남
