@@ -1,4 +1,3 @@
-import CopyButton from "@/components/CopyButton";
 import { wedding } from "@/data/wedding";
 
 const calendarDays = [
@@ -39,7 +38,7 @@ const calendarDays = [
 export default function WeddingInfoSection() {
   return (
     <section className="info-section section-pad" id="wedding-info">
-      <div className="paper-info-grid" aria-label="예식 일시와 장소">
+      <div className="paper-info-grid" aria-label="예식 일시">
         <div className="paper-calendar">
           <h2>SEPTEMBER</h2>
           <div className="calendar-weekdays" aria-hidden="true">
@@ -63,22 +62,6 @@ export default function WeddingInfoSection() {
             <span>{wedding.date.time}</span>
           </p>
         </div>
-
-        <div className="paper-location-summary">
-          <h2>LOCATION</h2>
-          <p className="paper-location-line">
-            {wedding.venue.name} / {wedding.venue.hall}
-            <br />
-            {wedding.venue.subwayLine} {wedding.venue.station} {wedding.venue.exit}
-          </p>
-        </div>
-      </div>
-
-      <div className="button-row">
-        <CopyButton
-          label="일정·장소 복사"
-          value={`${wedding.date.display} ${wedding.date.time}, ${wedding.venue.name} ${wedding.venue.hall} ${wedding.venue.floorDetail}`}
-        />
       </div>
     </section>
   );
