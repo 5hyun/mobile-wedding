@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://mobile-wedding-sage.vercel.app"
   ),
+  alternates: {
+    canonical: "/",
+  },
+  applicationName: "오현 · 혜선 모바일 청첩장",
   title: "오현과 혜선의 결혼식에 초대합니다",
   description:
     "2026년 9월 5일 토요일 오후 5시, 하우스오브더라움 벨루스홀에서 뵙겠습니다.",
@@ -32,6 +36,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ko_KR",
     siteName: "오현 · 혜선 모바일 청첩장",
+    url: "/",
     images: [
       {
         url: "/images/og/wedding-og.jpg",
