@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
+import { Camera, ChevronLeft, ChevronRight, Grid3X3, Heart, X } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { galleryPhotos } from "@/data/gallery";
+import { wedding } from "@/data/wedding";
 
 const lightboxPhotoVariants = {
   enter: (direction: number) => ({
@@ -34,16 +35,52 @@ const lightboxPhotoTransition = {
   },
 };
 
+const lightboxReducedMotionVariants = {
+  enter: {
+    opacity: 0,
+    x: "0%",
+  },
+  center: {
+    opacity: 1,
+    x: "0%",
+  },
+  exit: {
+    opacity: 0,
+    x: "0%",
+  },
+};
+
+const lightboxReducedMotionTransition = {
+  duration: 0.12,
+  ease: "easeOut" as const,
+};
+
 const swipeConfidenceThreshold = 7800;
 const getSwipePower = (offset: number, velocity: number) => Math.abs(offset) * velocity;
 const lightboxPreloadOffsets = [-2, -1, 1, 2] as const;
-const wideGalleryPhotoIndices = new Set([0, 7, 14]);
 const lightboxImageSizes = "(max-width: 596px) calc(100vw - 36px), 560px";
+const galleryImageSizes = "(max-width: 520px) calc((100vw - 4px) / 3), 172px";
+const galleryDateLabel = wedding.date.iso.slice(0, 10).replaceAll("-", ".");
+const galleryPlaceLabel = "RAUM";
 
-const getGalleryImageSizes = (photoIndex: number) =>
-  wideGalleryPhotoIndices.has(photoIndex)
-    ? "(max-width: 520px) 100vw, 480px"
-    : "(max-width: 520px) 50vw, 220px";
+const galleryHighlights = [
+  {
+    label: "STUDIO",
+    photoIndex: 0,
+  },
+  {
+    label: "VEIL",
+    photoIndex: 1,
+  },
+  {
+    label: "GARDEN",
+    photoIndex: 8,
+  },
+  {
+    label: "PORTRAIT",
+    photoIndex: 15,
+  },
+] as const;
 
 /** 현재 사진 주변 이미지를 미리 데워 부드럽게 넘기기 위한 목록 */
 const getLightboxPreloadPhotos = (currentIndex: number) => {
@@ -59,6 +96,19 @@ const getLightboxPreloadPhotos = (currentIndex: number) => {
 export default function GallerySection() {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const [slideDirection, setSlideDirection] = useState<1 | -1>(1);
+  const shouldReduceMotion = useReducedMotion();
+  const lightboxRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const previousFocusedElementRef = useRef<HTMLElement | null>(null);
+  const hasFocusedLightboxRef = useRef(false);
+
+  const handlePhotoOpen = useCallback((photoIndex: number) => {
+    previousFocusedElementRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    hasFocusedLightboxRef.current = false;
+    setSlideDirection(1);
+    setSelectedPhotoIndex(photoIndex);
+  }, []);
 
   const paginatePhoto = useCallback((direction: 1 | -1) => {
     setSlideDirection(direction);
@@ -74,6 +124,12 @@ export default function GallerySection() {
   /** 사진 상세 닫기 처리 */
   const handleCloseClick = useCallback(() => {
     setSelectedPhotoIndex(null);
+    hasFocusedLightboxRef.current = false;
+
+    window.requestAnimationFrame(() => {
+      previousFocusedElementRef.current?.focus();
+      previousFocusedElementRef.current = null;
+    });
   }, []);
 
   /** 이전 사진 이동 처리 */
@@ -94,19 +150,48 @@ export default function GallerySection() {
     /** 키보드 이동 처리 */
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        event.preventDefault();
         handleCloseClick();
       }
 
       if (event.key === "ArrowLeft") {
+        event.preventDefault();
         handlePreviousClick();
       }
 
       if (event.key === "ArrowRight") {
+        event.preventDefault();
         handleNextClick();
+      }
+
+      if (event.key === "Tab") {
+        const focusableElements = lightboxRef.current?.querySelectorAll<HTMLElement>(
+          "button, [href], [tabindex]:not([tabindex='-1'])"
+        );
+
+        if (!focusableElements?.length) {
+          return;
+        }
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
       }
     };
 
     document.body.style.overflow = "hidden";
+    if (!hasFocusedLightboxRef.current) {
+      closeButtonRef.current?.focus();
+      hasFocusedLightboxRef.current = true;
+    }
+
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
@@ -122,11 +207,11 @@ export default function GallerySection() {
     selectedPhotoIndex === null ? [] : getLightboxPreloadPhotos(selectedPhotoIndex);
 
   return (
-    <section className="gallery-section section-pad" id="gallery">
+    <section className="gallery-section section-pad" id="gallery" aria-labelledby="gallery-title">
       {/* 선별 사진 섹션 제목 */}
       <div className="section-copy centered">
-        <p className="soft-label">사진</p>
-        <h2>함께 남긴 사진</h2>
+        <p className="soft-label">PHOTO</p>
+        <h2 id="gallery-title">함께 남긴 사진</h2>
         <p>
           두 사람이 함께한 순간을
           <br />
@@ -134,14 +219,99 @@ export default function GallerySection() {
         </p>
       </div>
 
+      <div className="gallery-profile" aria-label="오현 혜선 웨딩 사진 프로필">
+        <button
+          className="gallery-avatar"
+          type="button"
+          onClick={() => handlePhotoOpen(0)}
+          aria-label="대표 웨딩 사진 크게 보기"
+        >
+          <span className="gallery-avatar-ring">
+            <Image
+              src={galleryPhotos[0].src}
+              alt=""
+              width={galleryPhotos[0].width}
+              height={galleryPhotos[0].height}
+              sizes="74px"
+            />
+          </span>
+        </button>
+        <div className="gallery-profile-copy">
+          <div className="gallery-handle-row">
+            <p className="gallery-handle" translate="no">
+              ohhyun.hyesun
+            </p>
+            <span>{galleryDateLabel}</span>
+          </div>
+          <dl className="gallery-stats" aria-label="사진첩 요약">
+            <div>
+              <dt>POSTS</dt>
+              <dd>{galleryPhotos.length}</dd>
+            </div>
+            <div>
+              <dt>DATE</dt>
+              <dd>09.05</dd>
+            </div>
+            <div>
+              <dt>PLACE</dt>
+              <dd>{galleryPlaceLabel}</dd>
+            </div>
+          </dl>
+          <p className="gallery-bio">
+            Kwon Ohhyun & Park Hyesun
+            <br />
+            Wedding archive
+          </p>
+        </div>
+      </div>
+
+      <div className="gallery-highlights" aria-label="사진 하이라이트">
+        {galleryHighlights.map((highlight) => {
+          const photo = galleryPhotos[highlight.photoIndex];
+
+          return (
+            <button
+              className="gallery-highlight"
+              key={highlight.label}
+              type="button"
+              onClick={() => handlePhotoOpen(highlight.photoIndex)}
+              aria-label={`${highlight.label} 사진 크게 보기`}
+            >
+              <span className="gallery-highlight-thumb">
+                <Image
+                  src={photo.src}
+                  alt=""
+                  width={photo.width}
+                  height={photo.height}
+                  sizes="58px"
+                />
+              </span>
+              <span>{highlight.label}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="gallery-feed-header" aria-hidden="true">
+        <span>
+          <Grid3X3 className="action-icon" size={15} />
+          FEED
+        </span>
+        <span>
+          <Heart className="action-icon" size={15} />
+          {galleryDateLabel}
+        </span>
+      </div>
+
       {/* 선별 사진 목록 */}
-      <div className="gallery-grid" aria-label="선별 웨딩 사진">
+      <div className="gallery-grid" aria-label={`웨딩 사진 ${galleryPhotos.length}장`}>
         {galleryPhotos.map((photo, photoIndex) => (
           <button
             className={`gallery-item gallery-item-${photo.mood}`}
             key={photo.src}
             type="button"
-            onClick={() => setSelectedPhotoIndex(photoIndex)}
+            onClick={() => handlePhotoOpen(photoIndex)}
+            aria-label={`${photo.alt} 크게 보기, ${photoIndex + 1} / ${galleryPhotos.length}`}
           >
             <Image
               src={photo.src}
@@ -149,16 +319,30 @@ export default function GallerySection() {
               width={photo.width}
               height={photo.height}
               preload
-              sizes={getGalleryImageSizes(photoIndex)}
+              sizes={galleryImageSizes}
             />
+            <span className="gallery-item-mark" aria-hidden="true">
+              <Camera className="action-icon" size={15} />
+            </span>
           </button>
         ))}
       </div>
 
       {selectedPhoto ? (
-        <div className="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기">
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="사진 크게 보기"
+          ref={lightboxRef}
+        >
           {/* 상세 사진 */}
-          <button className="lightbox-close" type="button" onClick={handleCloseClick}>
+          <button
+            className="lightbox-close"
+            type="button"
+            onClick={handleCloseClick}
+            ref={closeButtonRef}
+          >
             <X className="action-icon" size={22} aria-hidden="true" />
             <span className="sr-only">닫기</span>
           </button>
@@ -173,12 +357,18 @@ export default function GallerySection() {
                   className="lightbox-photo-frame"
                   key={selectedPhoto.src}
                   custom={slideDirection}
-                  variants={lightboxPhotoVariants}
+                  variants={
+                    shouldReduceMotion ? lightboxReducedMotionVariants : lightboxPhotoVariants
+                  }
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={lightboxPhotoTransition}
-                  drag="x"
+                  transition={
+                    shouldReduceMotion
+                      ? lightboxReducedMotionTransition
+                      : lightboxPhotoTransition
+                  }
+                  drag={shouldReduceMotion ? false : "x"}
                   dragConstraints={{ left: 0, right: 0 }}
                   dragElastic={0.18}
                   onDragEnd={(_, { offset, velocity }) => {
