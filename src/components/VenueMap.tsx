@@ -11,6 +11,7 @@ export default function VenueMap() {
         width={1280}
         height={916}
         className="venue-map-image"
+        preload
         sizes="(max-width: 520px) calc(100vw - 44px), 476px"
       />
     </figure>

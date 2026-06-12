@@ -15,7 +15,7 @@ export default function HeroSection() {
           alt={heroPhoto.alt}
           width={heroPhoto.width}
           height={heroPhoto.height}
-          priority
+          preload
           className="hero-image"
           sizes="(max-width: 520px) 100vw, 480px"
         />

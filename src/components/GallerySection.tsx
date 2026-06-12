@@ -148,7 +148,7 @@ export default function GallerySection() {
               alt={photo.alt}
               width={photo.width}
               height={photo.height}
-              loading={photoIndex < 4 ? "eager" : "lazy"}
+              preload
               sizes={getGalleryImageSizes(photoIndex)}
             />
           </button>

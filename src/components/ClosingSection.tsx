@@ -13,6 +13,7 @@ export default function ClosingSection() {
         alt={closingPhoto.alt}
         width={closingPhoto.width}
         height={closingPhoto.height}
+        preload
         sizes="(max-width: 520px) 100vw, 480px"
       />
 
