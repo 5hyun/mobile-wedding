@@ -3,7 +3,7 @@
 import Script from "next/script";
 import { Link2, MessageCircle, Phone } from "lucide-react";
 import { useState } from "react";
-import { mapLinks, wedding } from "@/data/wedding";
+import { wedding } from "@/data/wedding";
 import { copyTextToClipboard } from "@/lib/clipboard";
 
 const KAKAO_SDK_SRC = "https://t1.kakaocdn.net/kakao_js_sdk/2.8.1/kakao.min.js";
@@ -60,8 +60,8 @@ const invitationLink = {
   webUrl: SITE_URL,
 };
 const venueLink = {
-  mobileWebUrl: mapLinks.kakao,
-  webUrl: mapLinks.kakao,
+  mobileWebUrl: `${SITE_URL}/#venue`,
+  webUrl: `${SITE_URL}/#venue`,
 };
 
 export default function ContactShareSection() {
