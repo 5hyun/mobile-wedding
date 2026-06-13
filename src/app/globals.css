@@ -15,6 +15,7 @@
   --red-warm: #a13a3f;
   --red-soft: rgba(143, 38, 49, 0.12);
   --red-line: rgba(143, 38, 49, 0.34);
+  --red-quiet: rgba(143, 38, 49, 0.72);
   --olive: #7d8061;
   --olive-soft: rgba(125, 128, 97, 0.14);
   --rose: #c9888b;
@@ -141,7 +142,7 @@ svg {
 
 .section-copy {
   display: grid;
-  gap: 13px;
+  gap: 12px;
   max-width: 340px;
   margin: 0 auto 28px;
 }
@@ -154,11 +155,11 @@ svg {
 .soft-label {
   width: max-content;
   margin: 0;
-  padding: 3px 8px 2px;
-  border: 1px solid var(--red-line);
-  color: var(--red);
+  padding: 4px 9px 3px;
+  border: 1px solid rgba(143, 38, 49, 0.2);
+  color: var(--red-quiet);
   font-family: var(--font-hand), var(--font-paper);
-  font-size: 1.08rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1;
   transform: rotate(-2deg);
@@ -183,7 +184,7 @@ svg {
   margin: 0;
   color: var(--ink-soft);
   font-size: 0.96rem;
-  line-height: 1.92;
+  line-height: 1.84;
   word-break: keep-all;
 }
 
@@ -222,9 +223,9 @@ svg {
 .primary-button {
   border-color: rgba(143, 38, 49, 0.78);
   background:
-    linear-gradient(180deg, rgba(161, 58, 63, 0.96), rgba(143, 38, 49, 0.96));
+    linear-gradient(180deg, rgba(151, 48, 55, 0.94), rgba(128, 34, 43, 0.94));
   color: var(--paper-bright);
-  box-shadow: 0 11px 22px rgba(143, 38, 49, 0.18);
+  box-shadow: 0 7px 16px rgba(143, 38, 49, 0.14);
 }
 
 .subtle-button {
@@ -238,7 +239,7 @@ svg {
 
 .hero-section {
   position: relative;
-  padding: 30px 26px 42px;
+  padding: 26px 26px 34px;
   overflow: hidden;
   background: transparent;
 }
@@ -274,8 +275,8 @@ svg {
   z-index: 1;
   display: grid;
   align-content: center;
-  gap: 17px;
-  padding: 26px 22px 24px;
+  gap: 14px;
+  padding: 24px 22px 20px;
   border: 0;
   background: transparent;
   box-shadow: none;
@@ -284,10 +285,11 @@ svg {
 
 .hero-kicker {
   margin: 0;
-  color: var(--red);
+  color: var(--red-quiet);
   font-family: var(--font-paper);
-  font-size: 1.18rem;
+  font-size: 1.04rem;
   font-weight: 700;
+  letter-spacing: 0.06em;
   line-height: 1;
   text-align: center;
 }
@@ -295,7 +297,7 @@ svg {
 .hero-script-mark {
   justify-self: center;
   max-width: 220px;
-  margin: -8px 0 0;
+  margin: -5px 0 -2px;
   color: var(--red-warm);
   font-family: var(--font-hand), cursive;
   font-size: 2.22rem;
@@ -307,12 +309,12 @@ svg {
 
 .hero-image-wrap {
   position: relative;
-  width: min(100%, 312px);
+  width: min(76vw, 292px);
   margin: 0 auto;
-  padding: 10px 10px 24px;
+  padding: 9px 9px 22px;
   border: 1px solid rgba(82, 54, 42, 0.16);
   background: rgba(255, 253, 246, 0.78);
-  box-shadow: 0 13px 22px rgba(77, 46, 28, 0.13);
+  box-shadow: 0 10px 18px rgba(77, 46, 28, 0.1);
   transform: rotate(-1.2deg);
 }
 
@@ -320,12 +322,15 @@ svg {
   position: absolute;
   top: -12px;
   left: 50%;
-  width: 82px;
-  height: 23px;
-  background: rgba(217, 184, 108, 0.28);
+  width: 70px;
+  height: 20px;
+  background:
+    var(--paper-fiber) 0 0 / 36px 36px,
+    rgba(219, 191, 124, 0.22);
   border: 1px solid rgba(82, 54, 42, 0.06);
   content: "";
-  transform: translateX(-50%) rotate(2deg);
+  box-shadow: 0 3px 8px rgba(77, 46, 28, 0.06);
+  transform: translateX(-50%) rotate(1.2deg);
 }
 
 .hero-image-wrap figcaption {
@@ -344,7 +349,7 @@ svg {
   height: auto;
   object-fit: cover;
   object-position: center 39%;
-  filter: saturate(1.08) contrast(1.01) brightness(1.03) sepia(0.035);
+  filter: saturate(1.12) contrast(1.04) brightness(1.01) sepia(0.06);
 }
 
 .hero-copy {
@@ -357,8 +362,9 @@ svg {
 .hero-title-stack {
   display: grid;
   justify-items: center;
-  gap: 7px;
+  gap: 8px;
   width: 100%;
+  margin-top: 7px;
 }
 
 .hero-title-stack::before,
@@ -407,7 +413,7 @@ svg {
   align-self: center;
   color: var(--red-warm);
   font-family: var(--font-hand), cursive;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   font-style: normal;
   line-height: 1;
 }
@@ -422,9 +428,9 @@ svg {
 
 .hero-note {
   margin: 2px 0 0;
-  color: var(--red);
+  color: var(--red-quiet);
   font-family: var(--font-hand), cursive;
-  font-size: 1.34rem;
+  font-size: 1.16rem;
   font-weight: 700;
   line-height: 1.1;
   transform: rotate(-1deg);
@@ -453,7 +459,7 @@ svg {
   font-family: var(--font-paper);
   font-size: 0.72rem;
   font-weight: 700;
-  opacity: 0.46;
+  opacity: 0.3;
   transform: rotate(8deg);
 }
 

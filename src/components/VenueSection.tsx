@@ -8,7 +8,7 @@ export default function VenueSection() {
     <section className="venue-section section-pad" id="venue">
       {/* 오시는 길 정보 */}
       <div className="section-copy">
-        <p className="soft-label">LOCATION DETAILS</p>
+        <p className="soft-label">오시는 길</p>
         <h2>{wedding.venue.name}</h2>
         <p>
           {wedding.venue.address}
@@ -22,7 +22,7 @@ export default function VenueSection() {
           <TrainFront className="info-icon" size={19} />
         </span>
         <div>
-          <span>SUBWAY</span>
+          <span>지하철</span>
           <strong>
             {wedding.venue.subwayLine} {wedding.venue.station} {wedding.venue.exit}
           </strong>

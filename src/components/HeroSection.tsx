@@ -34,7 +34,7 @@ export default function HeroSection() {
             className="hero-image"
             sizes="(max-width: 430px) calc(100vw - 72px), 328px"
           />
-          <figcaption>color film archive</figcaption>
+          <figcaption>{wedding.date.iso.slice(0, 10).replaceAll("-", ".")} · RAUM</figcaption>
         </figure>
 
         {/* 첫 화면 정보 */}
@@ -48,12 +48,12 @@ export default function HeroSection() {
               <span>{wedding.bride.shortName}</span>
             </h1>
             <p className="hero-venue">
-              {wedding.venue.name}
+              {wedding.venue.name} · {wedding.venue.hall}
               <br />
-              {wedding.venue.hall} · {wedding.venue.floor} · {wedding.venue.station}
+              {wedding.venue.floor} · {wedding.venue.station}
             </p>
           </div>
-          <p className="hero-note">We are Getting Married</p>
+          <p className="hero-note">We are getting married</p>
           <div className="hero-actions">
             <a className="text-action primary-action" href="#wedding-info">
               <CalendarDays className="action-icon" size={17} aria-hidden="true" />

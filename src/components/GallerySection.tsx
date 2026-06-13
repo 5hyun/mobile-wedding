@@ -261,7 +261,7 @@ export default function GallerySection() {
     <section className="gallery-section section-pad" id="gallery" aria-labelledby="gallery-title">
       {/* 선별 사진 섹션 제목 */}
       <div className="section-copy centered">
-        <p className="soft-label">PHOTO</p>
+        <p className="soft-label">사진</p>
         <h2 id="gallery-title">함께 남긴 사진</h2>
         <p>
           두 사람이 함께한 순간을
@@ -296,22 +296,22 @@ export default function GallerySection() {
           </div>
           <dl className="gallery-stats" aria-label="사진첩 요약">
             <div>
-              <dt>POSTS</dt>
+              <dt>사진</dt>
               <dd>{galleryPhotos.length}</dd>
             </div>
             <div>
-              <dt>DATE</dt>
+              <dt>날짜</dt>
               <dd>09.05</dd>
             </div>
             <div>
-              <dt>PLACE</dt>
+              <dt>장소</dt>
               <dd>{galleryPlaceLabel}</dd>
             </div>
           </dl>
           <p className="gallery-bio">
-            Kwon Ohhyun & Park Hyesun
+            Ohhyun & Hyesun
             <br />
-            Wedding archive
+            wedding photo archive
           </p>
         </div>
       </div>
@@ -346,7 +346,7 @@ export default function GallerySection() {
       <div className="gallery-feed-header" aria-hidden="true">
         <span>
           <Grid3X3 className="action-icon" size={15} />
-          FEED
+          사진첩
         </span>
         <span>
           <Heart className="action-icon" size={15} />
