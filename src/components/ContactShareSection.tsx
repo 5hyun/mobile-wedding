@@ -61,7 +61,7 @@ export default function ContactShareSection() {
   };
 
   return (
-    <section className="contact-section section-pad">
+    <section className="contact-section section-pad" id="contact">
       <Script
         src={KAKAO_SDK_SRC}
         strategy="afterInteractive"

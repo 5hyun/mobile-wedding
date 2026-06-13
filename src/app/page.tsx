@@ -25,8 +25,8 @@ export default function Home() {
 
         {/* 상세 정보 */}
         <GallerySection />
-        <AccountSection />
         <ContactShareSection />
+        <AccountSection />
         <ClosingSection />
         <ScrollTopButton />
       </main>

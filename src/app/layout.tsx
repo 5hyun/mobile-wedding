@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_KR, Noto_Serif_KR } from "next/font/google";
+import { Caveat, Noto_Sans_KR, Noto_Serif_KR } from "next/font/google";
 import "./globals.css";
 
 const notoSansKr = Noto_Sans_KR({
@@ -12,6 +12,12 @@ const notoSerifKr = Noto_Serif_KR({
   variable: "--font-serif-kr",
   subsets: ["latin"],
   weight: ["400", "500"],
+});
+
+const caveat = Caveat({
+  variable: "--font-hand",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -58,7 +64,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#fbfaf7",
+  themeColor: "#fff8ea",
 };
 
 export default function RootLayout({
@@ -69,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${notoSansKr.variable} ${notoSerifKr.variable}`}
+      className={`${notoSansKr.variable} ${notoSerifKr.variable} ${caveat.variable}`}
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>{children}</body>

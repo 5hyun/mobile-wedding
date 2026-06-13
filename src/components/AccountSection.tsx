@@ -3,7 +3,7 @@ import { accountGroups } from "@/data/wedding";
 
 export default function AccountSection() {
   return (
-    <section className="account-section section-pad">
+    <section className="account-section section-pad" id="account">
       {/* 축의금 계좌 */}
       <div className="section-copy centered">
         <p className="soft-label">축하</p>

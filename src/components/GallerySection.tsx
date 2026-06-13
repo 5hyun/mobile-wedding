@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Camera, ChevronLeft, ChevronRight, Grid3X3, Heart, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { galleryPhotos } from "@/data/gallery";
 import { wedding } from "@/data/wedding";
 
@@ -101,6 +102,10 @@ export default function GallerySection() {
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const previousFocusedElementRef = useRef<HTMLElement | null>(null);
   const hasFocusedLightboxRef = useRef(false);
+  const scrollLockRef = useRef<{
+    scrollY: number;
+    bodyStyle: Pick<CSSStyleDeclaration, "left" | "overflow" | "position" | "right" | "top" | "width">;
+  } | null>(null);
 
   const handlePhotoOpen = useCallback((photoIndex: number) => {
     previousFocusedElementRef.current =
@@ -127,7 +132,7 @@ export default function GallerySection() {
     hasFocusedLightboxRef.current = false;
 
     window.requestAnimationFrame(() => {
-      previousFocusedElementRef.current?.focus();
+      previousFocusedElementRef.current?.focus({ preventScroll: true });
       previousFocusedElementRef.current = null;
     });
   }, []);
@@ -142,8 +147,10 @@ export default function GallerySection() {
     paginatePhoto(1);
   }, [paginatePhoto]);
 
+  const isLightboxOpen = selectedPhotoIndex !== null;
+
   useEffect(() => {
-    if (selectedPhotoIndex === null) {
+    if (!isLightboxOpen) {
       return;
     }
 
@@ -186,19 +193,63 @@ export default function GallerySection() {
       }
     };
 
-    document.body.style.overflow = "hidden";
+    const { body } = document;
+    const scrollY = window.scrollY;
+
+    scrollLockRef.current = {
+      scrollY,
+      bodyStyle: {
+        left: body.style.left,
+        overflow: body.style.overflow,
+        position: body.style.position,
+        right: body.style.right,
+        top: body.style.top,
+        width: body.style.width,
+      },
+    };
+
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+
     if (!hasFocusedLightboxRef.current) {
-      closeButtonRef.current?.focus();
+      closeButtonRef.current?.focus({ preventScroll: true });
       hasFocusedLightboxRef.current = true;
     }
 
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.body.style.overflow = "";
+      const lockedScroll = scrollLockRef.current;
+
+      if (lockedScroll) {
+        const restoreScrollY = lockedScroll.scrollY;
+        const root = document.documentElement;
+        const previousScrollBehavior = root.style.scrollBehavior;
+
+        body.style.position = lockedScroll.bodyStyle.position;
+        body.style.top = lockedScroll.bodyStyle.top;
+        body.style.left = lockedScroll.bodyStyle.left;
+        body.style.right = lockedScroll.bodyStyle.right;
+        body.style.width = lockedScroll.bodyStyle.width;
+        body.style.overflow = lockedScroll.bodyStyle.overflow;
+        scrollLockRef.current = null;
+
+        root.style.scrollBehavior = "auto";
+        window.requestAnimationFrame(() => {
+          window.scrollTo({ left: 0, top: restoreScrollY, behavior: "auto" });
+          window.requestAnimationFrame(() => {
+            root.style.scrollBehavior = previousScrollBehavior;
+          });
+        });
+      }
+
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [handleCloseClick, handleNextClick, handlePreviousClick, selectedPhotoIndex]);
+  }, [handleCloseClick, handleNextClick, handlePreviousClick, isLightboxOpen]);
 
   const selectedPhoto =
     selectedPhotoIndex === null ? null : galleryPhotos[selectedPhotoIndex] ?? null;
@@ -328,7 +379,7 @@ export default function GallerySection() {
         ))}
       </div>
 
-      {selectedPhoto ? (
+      {selectedPhoto && typeof document !== "undefined" ? createPortal(
         <div
           className="lightbox"
           role="dialog"
@@ -341,6 +392,10 @@ export default function GallerySection() {
             className="lightbox-close"
             type="button"
             onClick={handleCloseClick}
+            onPointerDown={(event) => {
+              event.stopPropagation();
+              handleCloseClick();
+            }}
             ref={closeButtonRef}
           >
             <X className="action-icon" size={22} aria-hidden="true" />
@@ -415,7 +470,8 @@ export default function GallerySection() {
               />
             ))}
           </div>
-        </div>
+        </div>,
+        document.body
       ) : null}
     </section>
   );
