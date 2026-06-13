@@ -98,11 +98,19 @@ export default function ContactShareSection() {
                   <strong>{person.name}</strong>
                 </div>
                 <div className="contact-actions">
-                  <a href={`tel:${person.phone}`} aria-label={`${group.label} ${person.label} ${person.name}에게 전화`}>
+                  <a
+                    href={`tel:${person.phone}`}
+                    title="전화"
+                    aria-label={`${group.label} ${person.label} ${person.name}에게 전화`}
+                  >
                     <Phone className="action-icon" size={17} aria-hidden="true" />
                     <span>전화</span>
                   </a>
-                  <a href={`sms:${person.phone}`} aria-label={`${group.label} ${person.label} ${person.name}에게 문자`}>
+                  <a
+                    href={`sms:${person.phone}`}
+                    title="문자"
+                    aria-label={`${group.label} ${person.label} ${person.name}에게 문자`}
+                  >
                     <MessageCircle className="action-icon" size={17} aria-hidden="true" />
                     <span>문자</span>
                   </a>

@@ -70,7 +70,6 @@ export default function HeroSection() {
             </a>
           </div>
         </div>
-        <span className="hero-panel-stamp" aria-hidden="true">09 · 05</span>
       </div>
     </section>
   );

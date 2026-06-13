@@ -66,19 +66,19 @@ const galleryPlaceLabel = "RAUM";
 
 const galleryHighlights = [
   {
-    label: "STUDIO",
+    label: "스튜디오",
     photoIndex: 0,
   },
   {
-    label: "VEIL",
+    label: "베일",
     photoIndex: 1,
   },
   {
-    label: "GARDEN",
+    label: "정원",
     photoIndex: 8,
   },
   {
-    label: "PORTRAIT",
+    label: "초상",
     photoIndex: 15,
   },
 ] as const;
@@ -289,18 +289,18 @@ export default function GallerySection() {
         </button>
         <div className="gallery-profile-copy">
           <div className="gallery-handle-row">
-            <p className="gallery-handle" translate="no">
-              ohhyun.hyesun
+            <p className="gallery-handle">
+              오현과 혜선의 기록
             </p>
-            <span>{galleryDateLabel}</span>
+            <span>촬영일 {galleryDateLabel}</span>
           </div>
           <dl className="gallery-stats" aria-label="사진첩 요약">
             <div>
-              <dt>사진</dt>
-              <dd>{galleryPhotos.length}</dd>
+              <dt>담은 사진</dt>
+              <dd>{galleryPhotos.length}장</dd>
             </div>
             <div>
-              <dt>날짜</dt>
+              <dt>예식일</dt>
               <dd>09.05</dd>
             </div>
             <div>
@@ -309,9 +309,9 @@ export default function GallerySection() {
             </div>
           </dl>
           <p className="gallery-bio">
-            Ohhyun & Hyesun
+            웃음이 먼저 남은 날들,
             <br />
-            wedding photo archive
+            조용히 모아둔 우리의 장면들
           </p>
         </div>
       </div>
@@ -346,7 +346,7 @@ export default function GallerySection() {
       <div className="gallery-feed-header" aria-hidden="true">
         <span>
           <Grid3X3 className="action-icon" size={15} />
-          사진첩
+          선별 사진
         </span>
         <span>
           <Heart className="action-icon" size={15} />

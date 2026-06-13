@@ -445,24 +445,6 @@ svg {
   gap: 9px;
 }
 
-.hero-panel-stamp {
-  position: absolute;
-  right: 20px;
-  bottom: 104px;
-  display: grid;
-  width: 54px;
-  height: 54px;
-  place-items: center;
-  border: 1px solid rgba(143, 38, 49, 0.56);
-  border-radius: 999px;
-  color: var(--red);
-  font-family: var(--font-paper);
-  font-size: 0.72rem;
-  font-weight: 700;
-  opacity: 0.3;
-  transform: rotate(8deg);
-}
-
 .invitation-section {
   padding-top: 64px;
 }
@@ -851,12 +833,13 @@ svg {
 }
 
 .gallery-profile {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 15px;
+  gap: 16px;
   align-items: center;
-  margin-bottom: 22px;
-  padding: 13px 0;
+  margin-bottom: 24px;
+  padding: 16px 0;
   border-top: 1px solid var(--line-red);
   border-bottom: 1px solid var(--line-red);
 }
@@ -874,23 +857,28 @@ svg {
 .gallery-highlight-thumb {
   display: block;
   padding: 4px;
-  border: 1px solid rgba(143, 38, 49, 0.28);
-  border-radius: 999px;
-  background: rgba(255, 249, 237, 0.74);
+  border: 1px solid rgba(82, 54, 42, 0.14);
+  border-radius: 2px;
+  background:
+    var(--paper-fiber) 0 0 / 54px 54px,
+    rgba(255, 253, 246, 0.8);
+  box-shadow: 0 6px 13px rgba(77, 46, 28, 0.08);
 }
 
 .gallery-avatar-ring {
-  width: 78px;
-  height: 78px;
+  width: 74px;
+  height: 88px;
+  padding-bottom: 14px;
+  transform: rotate(-2deg);
 }
 
 .gallery-avatar img,
 .gallery-highlight img {
   width: 100%;
   height: 100%;
-  border-radius: inherit;
+  border-radius: 1px;
   object-fit: cover;
-  filter: saturate(1.08) contrast(1.01) brightness(1.03) sepia(0.03);
+  filter: saturate(1.12) contrast(1.02) brightness(1.02) sepia(0.035);
 }
 
 .gallery-profile-copy {
@@ -904,7 +892,7 @@ svg {
   min-width: 0;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 8px;
 }
 
@@ -912,36 +900,40 @@ svg {
   min-width: 0;
   margin: 0;
   overflow: hidden;
-  color: var(--ink);
-  font-family: var(--font-paper);
-  font-size: 0.9rem;
+  color: var(--red);
+  font-family: var(--font-hand), cursive;
+  font-size: 1.28rem;
   font-weight: 700;
   line-height: 1.3;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transform: rotate(-1deg);
 }
 
 .gallery-handle-row span {
   flex: 0 0 auto;
-  padding: 3px 7px;
-  border: 1px solid var(--red-line);
-  color: var(--red);
+  padding: 3px 8px;
+  border: 1px solid rgba(143, 38, 49, 0.2);
+  color: var(--red-quiet);
   font-family: var(--font-paper);
-  font-size: 0.62rem;
+  font-size: 0.56rem;
   font-weight: 700;
 }
 
 .gallery-stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  gap: 6px;
   margin: 0;
 }
 
 .gallery-stats div {
   display: grid;
   min-width: 0;
-  gap: 2px;
+  gap: 3px;
+  padding: 6px 7px;
+  border: 1px solid rgba(143, 38, 49, 0.12);
+  background: rgba(255, 249, 237, 0.34);
 }
 
 .gallery-stats dt,
@@ -953,7 +945,7 @@ svg {
 .gallery-stats dt {
   color: var(--muted);
   font-family: var(--font-paper);
-  font-size: 0.58rem;
+  font-size: 0.52rem;
   font-weight: 700;
 }
 
@@ -969,15 +961,16 @@ svg {
 .gallery-bio {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.86rem;
-  line-height: 1.65;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  word-break: keep-all;
 }
 
 .gallery-highlights {
   display: flex;
-  gap: 14px;
-  margin: 0 calc(var(--gallery-edge) * -1) 18px;
-  padding: 0 var(--gallery-edge) 18px;
+  gap: 16px;
+  margin: 0 calc(var(--gallery-edge) * -1) 20px;
+  padding: 0 var(--gallery-edge) 20px;
   overflow-x: auto;
   border-bottom: 1px solid var(--line-red);
   scrollbar-width: none;
@@ -990,22 +983,23 @@ svg {
 
 .gallery-highlight {
   display: grid;
-  flex: 0 0 64px;
+  flex: 0 0 68px;
   justify-items: center;
   gap: 7px;
   color: var(--red);
 }
 
 .gallery-highlight-thumb {
-  width: 60px;
-  height: 60px;
+  width: 62px;
+  height: 74px;
+  padding: 4px 4px 12px;
 }
 
 .gallery-highlight > span:last-child {
   width: 100%;
   overflow: hidden;
   font-family: var(--font-paper);
-  font-size: 0.56rem;
+  font-size: 0.58rem;
   font-weight: 700;
   line-height: 1.25;
   text-align: center;
@@ -1017,7 +1011,6 @@ svg {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 0 calc(var(--gallery-edge) * -1);
-  border-top: 1px solid var(--line-red);
   border-bottom: 1px solid var(--line-red);
 }
 
@@ -1029,13 +1022,19 @@ svg {
   gap: 7px;
   color: var(--muted);
   font-family: var(--font-paper);
-  font-size: 0.64rem;
+  font-size: 0.6rem;
   font-weight: 700;
 }
 
 .gallery-feed-header span:first-child {
   color: var(--red);
-  box-shadow: inset 0 -2px 0 var(--red);
+  justify-content: flex-start;
+  padding-left: var(--gallery-edge);
+}
+
+.gallery-feed-header span:last-child {
+  justify-content: flex-end;
+  padding-right: var(--gallery-edge);
 }
 
 .gallery-grid {
@@ -1098,11 +1097,11 @@ svg {
 .account-group,
 .contact-group {
   position: relative;
-  padding: 20px 16px;
-  border: 1px solid var(--line-red);
+  padding: 21px 16px 18px;
+  border: 1px solid rgba(143, 38, 49, 0.2);
   background:
     var(--paper-fiber) 0 0 / 130px 130px,
-    rgba(255, 249, 237, 0.54);
+    rgba(255, 249, 237, 0.38);
 }
 
 .account-group::before,
@@ -1120,11 +1119,11 @@ svg {
 }
 
 .account-group:nth-child(1)::before {
-  content: "GROOM";
+  content: "신랑측";
 }
 
 .account-group:nth-child(2)::before {
-  content: "BRIDE";
+  content: "신부측";
 }
 
 .account-group h3 {
@@ -1147,7 +1146,7 @@ svg {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 12px;
   align-items: center;
-  padding: 12px 52px 12px 0;
+  padding: 13px 0;
   border-top: 1px solid rgba(143, 38, 49, 0.14);
 }
 
@@ -1190,54 +1189,74 @@ svg {
 }
 
 .contact-group.is-groom::before {
-  content: "CONTACT";
+  content: none;
 }
 
 .contact-group.is-bride::before {
-  content: "CONTACT";
+  content: none;
 }
 
 .contact-group-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 10px;
+  display: grid;
+  gap: 5px;
+  margin-bottom: 8px;
 }
 
 .contact-side-label {
-  padding: 3px 8px;
-  border: 1px solid var(--red-line);
-  color: var(--red);
+  width: max-content;
+  padding: 0 0 2px;
+  border-bottom: 1px solid rgba(143, 38, 49, 0.34);
+  color: var(--red-quiet);
   font-family: var(--font-paper);
   font-size: 0.64rem;
   font-weight: 700;
 }
 
 .contact-group-head strong {
-  color: var(--ink);
-  font-size: 0.94rem;
+  color: var(--red);
+  font-family: var(--font-hand), cursive;
+  font-size: 1.36rem;
   font-weight: 500;
+  line-height: 1;
+  transform: rotate(-1deg);
 }
 
 .contact-actions {
   display: flex;
-  gap: 7px;
+  gap: 8px;
 }
 
 .contact-actions a,
 .contact-actions button {
-  min-height: 36px;
-  padding: 8px 10px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  min-height: 0;
+  place-items: center;
+  padding: 0;
+  border-radius: 999px;
+  background: rgba(255, 249, 237, 0.4);
+  color: var(--red);
   font-size: 0.76rem;
+}
+
+.contact-actions a span,
+.contact-actions button span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .share-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
   gap: 9px;
   margin-top: 22px;
-  padding-right: 52px;
 }
 
 .toast-text,
@@ -1319,24 +1338,35 @@ svg {
 .floating-actions {
   position: fixed;
   right: max(18px, calc((100vw - var(--page-width)) / 2 + 18px));
-  bottom: calc(18px + env(safe-area-inset-bottom));
+  bottom: calc(24px + env(safe-area-inset-bottom));
   z-index: 30;
   display: grid;
   justify-items: end;
+  pointer-events: none;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.floating-actions.is-near-share-row {
+  opacity: 0;
+  transform: translateY(8px);
   pointer-events: none;
 }
 
 .floating-action-button {
   appearance: none;
   display: grid;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   place-items: center;
-  border: 1px solid rgba(255, 249, 237, 0.62);
+  border: 1px solid rgba(143, 38, 49, 0.2);
   border-radius: 999px;
-  background: rgba(143, 38, 49, 0.88);
-  color: var(--paper-bright);
-  box-shadow: 0 12px 24px rgba(77, 46, 28, 0.18);
+  background:
+    var(--paper-fiber) 0 0 / 38px 38px,
+    rgba(255, 249, 237, 0.82);
+  color: var(--red);
+  box-shadow: 0 9px 18px rgba(77, 46, 28, 0.14);
   pointer-events: auto;
   transition:
     opacity 180ms ease,
@@ -1346,8 +1376,8 @@ svg {
 }
 
 .floating-action-button .action-icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .music-toggle-button {
@@ -1370,7 +1400,7 @@ svg {
 .scroll-top-button {
   position: absolute;
   right: 0;
-  bottom: calc(100% + 10px);
+  bottom: calc(100% + 8px);
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px) scale(0.94);
@@ -1385,7 +1415,7 @@ svg {
 .floating-action-status {
   position: absolute;
   right: 0;
-  bottom: calc(100% + 64px);
+  bottom: calc(100% + 58px);
   width: max-content;
   max-width: min(260px, calc(100vw - 40px));
   margin: 0;
@@ -1622,9 +1652,16 @@ svg {
   }
 
   .primary-action:hover,
-  .primary-button:hover,
-  .floating-action-button:hover {
+  .primary-button:hover {
     background: var(--red);
+  }
+
+  .floating-action-button:hover {
+    border-color: rgba(143, 38, 49, 0.38);
+    background:
+      var(--paper-fiber) 0 0 / 38px 38px,
+      rgba(255, 249, 237, 0.96);
+    transform: translateY(-1px);
   }
 
   .gallery-item:hover img {
@@ -1720,19 +1757,16 @@ svg {
     font-size: 1.72rem;
   }
 
-  .account-item,
-  .contact-card {
+  .account-item {
     grid-template-columns: 1fr;
-    padding-right: 44px;
   }
 
-  .share-row {
-    padding-right: 44px;
+  .contact-card {
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
   .contact-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    gap: 6px;
   }
 
   .paper-date-line,
@@ -1803,10 +1837,6 @@ svg {
 
   .countdown-time-number {
     font-size: 1.48rem;
-  }
-
-  .hero-panel-stamp {
-    display: none;
   }
 }
 

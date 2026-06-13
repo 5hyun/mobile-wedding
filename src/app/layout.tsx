@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Caveat, Noto_Sans_KR, Noto_Serif_KR } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const notoSansKr = Noto_Sans_KR({
@@ -67,6 +68,49 @@ export const viewport: Viewport = {
   themeColor: "#fff8ea",
 };
 
+const extensionHydrationGuardScript = `
+(() => {
+  const cleanExtensionNodes = () => {
+    const head = document.head;
+
+    if (!head) {
+      return;
+    }
+
+    head.querySelectorAll("#__endic_crx__, [id^='__endic_crx__']").forEach((node) => {
+      node.remove();
+    });
+
+    head.querySelectorAll("[data-wxt-integrated]").forEach((node) => {
+      node.removeAttribute("data-wxt-integrated");
+
+      if (node instanceof HTMLElement && node.tagName === "DIV") {
+        node.hidden = true;
+      }
+    });
+  };
+
+  cleanExtensionNodes();
+
+  const observer = new MutationObserver(cleanExtensionNodes);
+  observer.observe(document.documentElement, {
+    attributeFilter: ["data-wxt-integrated", "hidden"],
+    attributes: true,
+    childList: true,
+    subtree: true,
+  });
+
+  window.addEventListener(
+    "load",
+    () => {
+      cleanExtensionNodes();
+      window.setTimeout(() => observer.disconnect(), 1200);
+    },
+    { once: true }
+  );
+})();
+`;
+
 export default function RootLayout({
   children, // 페이지 본문
 }: Readonly<{
@@ -78,7 +122,14 @@ export default function RootLayout({
       className={`${notoSansKr.variable} ${notoSerifKr.variable} ${caveat.variable}`}
       suppressHydrationWarning
     >
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        {children}
+        <Script
+          id="extension-hydration-guard"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: extensionHydrationGuardScript }}
+        />
+      </body>
     </html>
   );
 }

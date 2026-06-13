@@ -14,6 +14,7 @@ import {
 export default function ScrollTopButton() {
   const [isVisible, setIsVisible] = useState(false);
   const [isKakaoReady, setIsKakaoReady] = useState(false);
+  const [isShareRowVisible, setIsShareRowVisible] = useState(false);
   const [shareStatus, setShareStatus] = useState("");
 
   useEffect(() => {
@@ -25,6 +26,27 @@ export default function ScrollTopButton() {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const shareRow = document.querySelector(".share-row");
+
+    if (!shareRow) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsShareRowVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.12,
+      }
+    );
+
+    observer.observe(shareRow);
+
+    return () => observer.disconnect();
   }, []);
 
   const handleScrollTopClick = () => {
@@ -45,7 +67,10 @@ export default function ScrollTopButton() {
   };
 
   return (
-    <div className="floating-actions" aria-label="빠른 실행">
+    <div
+      className={`floating-actions${isShareRowVisible ? " is-near-share-row" : ""}`}
+      aria-label="빠른 실행"
+    >
       <Script
         src={KAKAO_SDK_SRC}
         strategy="afterInteractive"
