@@ -8,6 +8,8 @@ export const wedding = {
     motherMemorial: true,
     phone: "010-0000-0000",
     phoneHref: "01000000000",
+    fatherPhone: "010-0000-0000",
+    fatherPhoneHref: "01000000000",
   },
   bride: {
     name: "박혜선",
@@ -17,6 +19,10 @@ export const wedding = {
     motherMemorial: false,
     phone: "010-1111-1111",
     phoneHref: "01011111111",
+    fatherPhone: "010-0000-0000",
+    fatherPhoneHref: "01000000000",
+    motherPhone: "010-0000-0000",
+    motherPhoneHref: "01000000000",
   },
   date: {
     iso: "2026-09-05T17:00:00+09:00",

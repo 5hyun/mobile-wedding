@@ -1162,8 +1162,56 @@ img {
 
 .contact-list {
   display: grid;
-  gap: 10px;
+  gap: 22px;
   margin-top: 26px;
+}
+
+.contact-group {
+  --contact-side-color: var(--accent-deep);
+  --contact-side-bg: var(--accent-soft);
+  display: grid;
+  gap: 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--contact-side-color);
+}
+
+.contact-group.is-groom {
+  --contact-side-color: #607267;
+  --contact-side-bg: rgba(96, 114, 103, 0.12);
+}
+
+.contact-group.is-bride {
+  --contact-side-color: var(--accent-deep);
+  --contact-side-bg: var(--accent-soft);
+}
+
+.contact-group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 0 8px;
+}
+
+.contact-group-head strong {
+  color: var(--contact-side-color);
+  font-family: var(--font-serif-kr), serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.contact-side-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 10px;
+  border: 1px solid color-mix(in srgb, var(--contact-side-color) 28%, transparent);
+  background: var(--contact-side-bg);
+  color: var(--contact-side-color);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .contact-card {
@@ -1316,10 +1364,28 @@ img {
   color: rgba(79, 78, 75, 0.92);
 }
 
+.floating-action-button.music-toggle-button.is-awaiting-gesture {
+  animation: music-toggle-pulse 1.7s ease-in-out infinite;
+  color: var(--accent-deep);
+}
+
 .floating-action-button.music-toggle-button .action-icon {
   width: 18px;
   height: 18px;
   stroke-width: 2.25;
+}
+
+@keyframes music-toggle-pulse {
+  0%,
+  100% {
+    opacity: 0.74;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
 }
 
 .floating-actions {

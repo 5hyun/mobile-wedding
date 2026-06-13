@@ -14,6 +14,28 @@ import {
   SITE_URL,
 } from "@/lib/kakaoShare";
 
+const contactGroups = [
+  {
+    side: "groom",
+    label: "신랑측",
+    name: `${wedding.groom.shortName} 측`,
+    people: [
+      { label: "신랑", name: wedding.groom.shortName, phone: wedding.groom.phoneHref },
+      { label: "아버님", name: wedding.groom.father, phone: wedding.groom.fatherPhoneHref },
+    ],
+  },
+  {
+    side: "bride",
+    label: "신부측",
+    name: `${wedding.bride.shortName} 측`,
+    people: [
+      { label: "신부", name: wedding.bride.shortName, phone: wedding.bride.phoneHref },
+      { label: "아버님", name: wedding.bride.father, phone: wedding.bride.fatherPhoneHref },
+      { label: "어머님", name: wedding.bride.mother, phone: wedding.bride.motherPhoneHref },
+    ],
+  },
+] as const;
+
 export default function ContactShareSection() {
   const [shareStatus, setShareStatus] = useState("");
   const [isKakaoReady, setIsKakaoReady] = useState(false);
@@ -62,27 +84,32 @@ export default function ContactShareSection() {
         <p>예식 관련 문의는 아래 연락처로 부탁드립니다.</p>
       </div>
 
-      <div className="contact-list" aria-label="신랑 신부 연락처">
-        {[
-          { label: "신랑", name: wedding.groom.shortName, phone: wedding.groom.phoneHref },
-          { label: "신부", name: wedding.bride.shortName, phone: wedding.bride.phoneHref },
-        ].map((person) => (
-          <article className="contact-card" key={person.label}>
-            <div>
-              <span>{person.label}</span>
-              <strong>{person.name}</strong>
+      <div className="contact-list" aria-label="신랑 신부 및 혼주 연락처">
+        {contactGroups.map((group) => (
+          <div className={`contact-group is-${group.side}`} key={group.side}>
+            <div className="contact-group-head">
+              <span className="contact-side-label">{group.label}</span>
+              <strong>{group.name}</strong>
             </div>
-            <div className="contact-actions">
-              <a href={`tel:${person.phone}`} aria-label={`${person.label} ${person.name}에게 전화`}>
-                <Phone className="action-icon" size={17} aria-hidden="true" />
-                <span>전화</span>
-              </a>
-              <a href={`sms:${person.phone}`} aria-label={`${person.label} ${person.name}에게 문자`}>
-                <MessageCircle className="action-icon" size={17} aria-hidden="true" />
-                <span>문자</span>
-              </a>
-            </div>
-          </article>
+            {group.people.map((person) => (
+              <article className="contact-card" key={`${group.side}-${person.label}`}>
+                <div>
+                  <span>{person.label}</span>
+                  <strong>{person.name}</strong>
+                </div>
+                <div className="contact-actions">
+                  <a href={`tel:${person.phone}`} aria-label={`${group.label} ${person.label} ${person.name}에게 전화`}>
+                    <Phone className="action-icon" size={17} aria-hidden="true" />
+                    <span>전화</span>
+                  </a>
+                  <a href={`sms:${person.phone}`} aria-label={`${group.label} ${person.label} ${person.name}에게 문자`}>
+                    <MessageCircle className="action-icon" size={17} aria-hidden="true" />
+                    <span>문자</span>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
         ))}
       </div>
 
