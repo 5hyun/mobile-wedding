@@ -14,7 +14,7 @@ export default function ClosingSection() {
         width={closingPhoto.width}
         height={closingPhoto.height}
         preload
-        sizes="(max-width: 520px) 100vw, 480px"
+        sizes="(max-width: 430px) 100vw, 430px"
       />
 
       {/* 감사 문구 */}

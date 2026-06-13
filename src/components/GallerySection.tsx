@@ -59,7 +59,7 @@ const swipeConfidenceThreshold = 7800;
 const getSwipePower = (offset: number, velocity: number) => Math.abs(offset) * velocity;
 const lightboxPreloadOffsets = [-2, -1, 1, 2] as const;
 const lightboxImageSizes = "(max-width: 596px) calc(100vw - 36px), 560px";
-const galleryImageSizes = "(max-width: 520px) calc((100vw - 4px) / 3), 172px";
+const galleryImageSizes = "(max-width: 430px) calc((100vw - 4px) / 3), 142px";
 const galleryDateLabel = wedding.date.iso.slice(0, 10).replaceAll("-", ".");
 const galleryPlaceLabel = "RAUM";
 

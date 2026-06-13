@@ -1,4 +1,5 @@
 import AccountSection from "@/components/AccountSection";
+import BackgroundMusic from "@/components/BackgroundMusic";
 import ClosingSection from "@/components/ClosingSection";
 import ContactShareSection from "@/components/ContactShareSection";
 import GallerySection from "@/components/GallerySection";
@@ -12,6 +13,8 @@ export default function Home() {
   return (
     <div className="site-shell">
       <main className="invitation-page" id="top">
+        <BackgroundMusic />
+
         {/* 첫 화면 */}
         <HeroSection />
 

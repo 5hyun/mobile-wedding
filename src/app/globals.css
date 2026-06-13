@@ -16,7 +16,7 @@
   --accent-soft: rgba(154, 101, 112, 0.12);
   --focus: rgba(154, 101, 112, 0.34);
   --radius: 2px;
-  --page-width: 520px;
+  --page-width: 430px;
   --font-paper: "Courier New", Courier, ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
@@ -177,7 +177,7 @@ img {
 .copy-button:active,
 .map-actions a:active,
 .contact-actions a:active,
-.scroll-top-button:active {
+.floating-action-button:active {
   transform: translateY(1px);
 }
 
@@ -191,7 +191,7 @@ img {
 .gallery-item:focus-visible,
 .lightbox-close:focus-visible,
 .lightbox-nav:focus-visible,
-.scroll-top-button:focus-visible {
+.floating-action-button:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 3px;
 }
@@ -463,6 +463,11 @@ img {
 
 .paper-info-grid {
   display: grid;
+  width: min(100%, 344px);
+  margin-inline: auto;
+}
+
+.paper-calendar {
   width: min(100%, 280px);
   margin-inline: auto;
 }
@@ -538,6 +543,189 @@ img {
 
 .paper-date-line {
   white-space: nowrap;
+}
+
+.wedding-countdown {
+  display: grid;
+  gap: 17px;
+  width: min(100%, 344px);
+  margin: 32px auto 0;
+  padding-top: 26px;
+  border-top: 1px solid rgba(202, 197, 186, 0.62);
+}
+
+.countdown-title {
+  margin: 0;
+  color: var(--paper-ink);
+  font-family: var(--font-serif-kr), serif;
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.55;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.countdown-title span {
+  color: var(--accent-deep);
+  font-family: var(--font-sans-kr), sans-serif;
+}
+
+.countdown-board {
+  display: grid;
+  width: 100%;
+  justify-items: center;
+  gap: 11px;
+}
+
+.countdown-day-pill {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: baseline;
+  gap: 0;
+  padding: 5px 14px 6px;
+  border-top: 1px solid rgba(202, 197, 186, 0.64);
+  border-bottom: 1px solid rgba(202, 197, 186, 0.64);
+  color: var(--accent-deep);
+  font-family: var(--font-paper);
+  line-height: 1;
+}
+
+.countdown-day-prefix {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.countdown-day-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.countdown-day-unit {
+  margin-left: 7px;
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-weight: 700;
+}
+
+.countdown-clock {
+  --countdown-time-cell: 54px;
+  --countdown-colon-cell: 12px;
+  --countdown-time-gap: 7px;
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  justify-items: center;
+  gap: 7px;
+}
+
+.countdown-time-row,
+.countdown-time-labels {
+  display: grid;
+  grid-template-columns:
+    var(--countdown-time-cell)
+    var(--countdown-colon-cell)
+    var(--countdown-time-cell)
+    var(--countdown-colon-cell)
+    var(--countdown-time-cell);
+  column-gap: var(--countdown-time-gap);
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.countdown-time-number {
+  display: inline-flex;
+  width: var(--countdown-time-cell);
+  justify-content: center;
+  color: var(--accent-deep);
+  font-family: var(--font-paper);
+  font-size: 1.86rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.countdown-time-colon {
+  display: inline-block;
+  width: var(--countdown-colon-cell);
+  color: rgba(111, 74, 82, 0.68);
+  font-family: var(--font-paper);
+  font-size: 1.42rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  transform: translateY(-0.07em);
+}
+
+.countdown-time-labels {
+  color: var(--muted);
+  font-family: var(--font-paper);
+  font-size: 0.56rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.countdown-time-labels span:nth-child(1) {
+  grid-column: 1;
+}
+
+.countdown-time-labels span:nth-child(2) {
+  grid-column: 3;
+}
+
+.countdown-time-labels span:nth-child(3) {
+  grid-column: 5;
+}
+
+.countdown-value {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2ch;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-digit {
+  position: relative;
+  display: inline-grid;
+  width: 1ch;
+  height: 1em;
+  overflow: hidden;
+  min-width: 1ch;
+  text-align: center;
+  vertical-align: top;
+  contain: paint;
+}
+
+.countdown-digit-face {
+  grid-area: 1 / 1;
+  display: block;
+  line-height: 1;
+  transform: translateY(0);
+  will-change: opacity, transform;
+}
+
+.countdown-digit.is-dropping .countdown-digit-face.is-current {
+  animation: countdown-digit-drop 460ms cubic-bezier(0.21, 0.82, 0.28, 1) both;
+}
+
+@keyframes countdown-digit-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-86%);
+  }
+
+  62% {
+    opacity: 1;
+    transform: translateY(4%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .button-row,
@@ -1108,41 +1296,100 @@ img {
   overscroll-behavior: contain;
 }
 
-.scroll-top-button {
+.music-toggle {
+  position: fixed;
+  top: calc(8px + env(safe-area-inset-top));
+  right: max(8px, calc((100vw - var(--page-width)) / 2 + 8px));
+  z-index: 22;
+  pointer-events: none;
+}
+
+.floating-action-button.music-toggle-button {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  color: rgba(79, 78, 75, 0.82);
+  box-shadow: none;
+}
+
+.floating-action-button.music-toggle-button.is-on {
+  color: rgba(79, 78, 75, 0.92);
+}
+
+.floating-action-button.music-toggle-button .action-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.25;
+}
+
+.floating-actions {
   position: fixed;
   right: max(18px, calc((100vw - var(--page-width)) / 2 + 18px));
   bottom: calc(18px + env(safe-area-inset-bottom));
   z-index: 20;
+  display: grid;
+  gap: 12px;
+  justify-items: end;
+  pointer-events: none;
+}
+
+.floating-action-button {
   appearance: none;
-  display: inline-flex;
-  min-height: 38px;
-  align-items: center;
-  gap: 6px;
-  padding: 0 10px;
-  border: 1px solid rgba(202, 197, 186, 0.86);
-  border-radius: var(--radius);
-  background: rgba(251, 250, 247, 0.88);
-  color: var(--paper-ink);
-  box-shadow: 0 8px 22px rgba(23, 23, 23, 0.06);
-  font-size: 0.76rem;
-  font-weight: 700;
-  line-height: 1.35;
-  text-decoration: none;
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(218, 217, 216, 0.86);
+  color: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 10px 20px rgba(23, 23, 23, 0.12);
+  pointer-events: auto;
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
+  backdrop-filter: blur(12px);
+}
+
+.floating-action-button .action-icon {
+  width: 21px;
+  height: 21px;
+  stroke-width: 2.1;
+}
+
+.scroll-top-button {
   opacity: 0;
   pointer-events: none;
-  transform: translateY(8px);
-  transition:
-    opacity 180ms ease,
-    transform 180ms ease,
-    border-color 180ms ease,
-    background 180ms ease;
-  backdrop-filter: blur(10px);
+  transform: translateY(10px) scale(0.94);
 }
 
 .scroll-top-button.is-visible {
   opacity: 0.94;
   pointer-events: auto;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+}
+
+.floating-action-status {
+  position: absolute;
+  right: 60px;
+  bottom: 0;
+  width: max-content;
+  max-width: min(230px, calc(100vw - 126px));
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid rgba(223, 220, 212, 0.8);
+  border-radius: var(--radius);
+  background: rgba(251, 250, 247, 0.94);
+  box-shadow: 0 10px 22px rgba(23, 23, 23, 0.08);
+  color: var(--accent-deep);
+  font-size: 0.76rem;
+  line-height: 1.45;
+  text-align: right;
+  word-break: keep-all;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
 }
 
 .lightbox-figure {
@@ -1276,9 +1523,14 @@ img {
   .copy-button:hover,
   .map-actions a:hover,
   .contact-actions a:hover,
-  .scroll-top-button:hover {
+  .floating-action-button:hover {
     border-color: var(--paper-ink);
-    background: var(--paper-soft);
+    background: rgba(202, 200, 198, 0.96);
+  }
+
+  .music-toggle-button:hover {
+    background: rgba(251, 250, 247, 0.78);
+    color: var(--paper-ink);
   }
 
   .primary-action:hover,
@@ -1300,7 +1552,7 @@ img {
   }
 }
 
-@media (min-width: 521px) {
+@media (min-width: 431px) {
   .site-shell {
     padding: 24px 0;
   }
@@ -1434,6 +1686,8 @@ img {
   *,
   *::before,
   *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
   }
 }

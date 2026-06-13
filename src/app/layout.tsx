@@ -72,7 +72,7 @@ export default function RootLayout({
       className={`${notoSansKr.variable} ${notoSerifKr.variable}`}
       suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

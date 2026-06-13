@@ -1,4 +1,5 @@
 import { wedding } from "@/data/wedding";
+import WeddingCountdown from "@/components/WeddingCountdown";
 
 const calendarDays = [
   "",
@@ -59,6 +60,7 @@ export default function WeddingInfoSection() {
           </div>
           <p className="paper-date-line">2026년 9월 5일 (토) {wedding.date.time}</p>
         </div>
+        <WeddingCountdown />
       </div>
     </section>
   );

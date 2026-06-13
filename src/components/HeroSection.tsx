@@ -17,7 +17,7 @@ export default function HeroSection() {
           height={heroPhoto.height}
           preload
           className="hero-image"
-          sizes="(max-width: 520px) 100vw, 480px"
+          sizes="(max-width: 430px) 100vw, 430px"
         />
         <span className="hero-name-label hero-name-groom">[ohhyun]</span>
         <span className="hero-name-label hero-name-bride">[hyesun]</span>
