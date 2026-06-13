@@ -13,6 +13,14 @@ export default function BackgroundMusic() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAutoplayBlocked, setIsAutoplayBlocked] = useState(false);
 
+  const syncPlaybackState = useCallback(() => {
+    const audio = audioRef.current;
+
+    setIsPlaying(
+      Boolean(audio && !audio.paused && !audio.ended && !audio.muted && audio.volume > 0)
+    );
+  }, []);
+
   const startAudio = useCallback(async () => {
     const audio = audioRef.current;
 
@@ -36,7 +44,7 @@ export default function BackgroundMusic() {
     try {
       await audio.play();
       window.clearTimeout(blockedHintTimer);
-      setIsPlaying(true);
+      syncPlaybackState();
       setIsAutoplayBlocked(false);
       return true;
     } catch {
@@ -46,7 +54,7 @@ export default function BackgroundMusic() {
       setIsAutoplayBlocked(true);
       return false;
     }
-  }, []);
+  }, [syncPlaybackState]);
 
   const stopAudio = useCallback(() => {
     const audio = audioRef.current;
@@ -100,22 +108,33 @@ export default function BackgroundMusic() {
       return;
     }
 
-    const handlePlay = () => {
-      setIsPlaying(true);
+    const handlePlaying = () => {
+      syncPlaybackState();
       setIsAutoplayBlocked(false);
     };
-    const handlePause = () => setIsPlaying(false);
+    const handleInactive = () => setIsPlaying(false);
+    const handleVolumeChange = () => syncPlaybackState();
 
-    audio.addEventListener("play", handlePlay);
-    audio.addEventListener("pause", handlePause);
-    audio.addEventListener("ended", handlePause);
+    audio.addEventListener("playing", handlePlaying);
+    audio.addEventListener("play", syncPlaybackState);
+    audio.addEventListener("pause", handleInactive);
+    audio.addEventListener("ended", handleInactive);
+    audio.addEventListener("waiting", handleInactive);
+    audio.addEventListener("stalled", handleInactive);
+    audio.addEventListener("error", handleInactive);
+    audio.addEventListener("volumechange", handleVolumeChange);
 
     return () => {
-      audio.removeEventListener("play", handlePlay);
-      audio.removeEventListener("pause", handlePause);
-      audio.removeEventListener("ended", handlePause);
+      audio.removeEventListener("playing", handlePlaying);
+      audio.removeEventListener("play", syncPlaybackState);
+      audio.removeEventListener("pause", handleInactive);
+      audio.removeEventListener("ended", handleInactive);
+      audio.removeEventListener("waiting", handleInactive);
+      audio.removeEventListener("stalled", handleInactive);
+      audio.removeEventListener("error", handleInactive);
+      audio.removeEventListener("volumechange", handleVolumeChange);
     };
-  }, []);
+  }, [syncPlaybackState]);
 
   useEffect(() => {
     if (!wantsAudio) {
@@ -134,16 +153,24 @@ export default function BackgroundMusic() {
       void startAudio();
     };
 
-    window.addEventListener("pointerdown", handleUserGesture, { passive: true });
-    window.addEventListener("touchstart", handleUserGesture, { passive: true });
-    window.addEventListener("wheel", handleUserGesture, { passive: true });
-    window.addEventListener("keydown", handleUserGesture);
+    const passiveCaptureOptions = { capture: true, passive: true };
+
+    document.addEventListener("pointerdown", handleUserGesture, passiveCaptureOptions);
+    document.addEventListener("click", handleUserGesture, passiveCaptureOptions);
+    document.addEventListener("touchstart", handleUserGesture, passiveCaptureOptions);
+    document.addEventListener("touchend", handleUserGesture, passiveCaptureOptions);
+    window.addEventListener("wheel", handleUserGesture, passiveCaptureOptions);
+    window.addEventListener("scroll", handleUserGesture, passiveCaptureOptions);
+    window.addEventListener("keydown", handleUserGesture, { capture: true });
 
     return () => {
-      window.removeEventListener("pointerdown", handleUserGesture);
-      window.removeEventListener("touchstart", handleUserGesture);
-      window.removeEventListener("wheel", handleUserGesture);
-      window.removeEventListener("keydown", handleUserGesture);
+      document.removeEventListener("pointerdown", handleUserGesture, passiveCaptureOptions);
+      document.removeEventListener("click", handleUserGesture, passiveCaptureOptions);
+      document.removeEventListener("touchstart", handleUserGesture, passiveCaptureOptions);
+      document.removeEventListener("touchend", handleUserGesture, passiveCaptureOptions);
+      window.removeEventListener("wheel", handleUserGesture, passiveCaptureOptions);
+      window.removeEventListener("scroll", handleUserGesture, passiveCaptureOptions);
+      window.removeEventListener("keydown", handleUserGesture, { capture: true });
     };
   }, [startAudio, wantsAudio]);
 
@@ -176,22 +203,22 @@ export default function BackgroundMusic() {
     stopAudio();
   };
 
-  const Icon = wantsAudio ? Volume2 : VolumeX;
+  const Icon = isPlaying ? Volume2 : VolumeX;
   const isAwaitingGesture = wantsAudio && !isPlaying && isAutoplayBlocked;
 
   return (
     <div className="music-toggle" aria-label="배경 음악">
       <audio ref={audioRef} src={AUDIO_SRC} preload="auto" loop playsInline />
       <button
-        className={`floating-action-button music-toggle-button${wantsAudio ? " is-on" : ""}${
-          isPlaying ? " is-playing" : ""
+        className={`floating-action-button music-toggle-button${
+          isPlaying ? " is-on is-playing" : ""
         }${isAwaitingGesture ? " is-awaiting-gesture" : ""}`}
         type="button"
         onPointerDown={handlePendingPlayback}
         onTouchStart={handlePendingPlayback}
         onClick={handleToggleClick}
-        aria-label={wantsAudio ? (isPlaying ? "배경 음악 끄기" : "배경 음악 재생하기") : "배경 음악 켜기"}
-        aria-pressed={wantsAudio}
+        aria-label={isPlaying ? "배경 음악 끄기" : "배경 음악 재생하기"}
+        aria-pressed={isPlaying}
       >
         <Icon className="action-icon" size={23} aria-hidden="true" />
       </button>
